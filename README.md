@@ -1,5 +1,10 @@
-READ ME
+##READ ME
 
-Progetto Scolastico
+**Progetto Scolastico**
+
+Componenti:
+- Igor Gargoyle
 
 Prova Git
+
+Prova N.1 
