@@ -1,4 +1,4 @@
-##READ ME
+## READ ME
 
 **Progetto Scolastico**
 
