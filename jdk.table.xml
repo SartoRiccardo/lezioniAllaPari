@@ -1,0 +1,91 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="Python 3.6" />
+      <type value="Python SDK" />
+      <version value="Python 3.6.4" />
+      <homePath value="C:\Program Files\Python36\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://C:/Program Files/Python36/DLLs" type="simple" />
+            <root url="file://C:/Program Files/Python36/Lib" type="simple" />
+            <root url="file://C:/Program Files/Python36" type="simple" />
+            <root url="file://C:/Program Files/Python36/Lib/site-packages" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/-1120166012" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3.4" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.6 (cancella)" />
+      <type value="Python SDK" />
+      <version value="Python 3.6.4" />
+      <homePath value="J:\Progetti\cancella\venv\Scripts\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://C:/Program Files/Python36/DLLs" type="simple" />
+            <root url="file://C:/Program Files/Python36/Lib" type="simple" />
+            <root url="file://C:/Program Files/Python36" type="simple" />
+            <root url="file://J:/Progetti/cancella/venv" type="simple" />
+            <root url="file://J:/Progetti/cancella/venv/Lib/site-packages" type="simple" />
+            <root url="jar://J:/Progetti/cancella/venv/Lib/site-packages/setuptools-39.1.0-py3.6.egg!/" type="simple" />
+            <root url="file://J:/Progetti/cancella/venv/Lib/site-packages/pip-10.0.1-py3.6.egg" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/2086100273" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3.4" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional ASSOCIATED_PROJECT_PATH="J:/Progetti/cancella" />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.6 (areaGeografica)" />
+      <type value="Python SDK" />
+      <version value="Python 3.6.4" />
+      <homePath value="J:\Progetti\areaGeografica\venv\Scripts\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://C:/Program Files/Python36/DLLs" type="simple" />
+            <root url="file://C:/Program Files/Python36/Lib" type="simple" />
+            <root url="file://C:/Program Files/Python36" type="simple" />
+            <root url="file://J:/Progetti/areaGeografica/venv" type="simple" />
+            <root url="file://J:/Progetti/areaGeografica/venv/Lib/site-packages" type="simple" />
+            <root url="jar://J:/Progetti/areaGeografica/venv/Lib/site-packages/setuptools-39.1.0-py3.6.egg!/" type="simple" />
+            <root url="file://J:/Progetti/areaGeografica/venv/Lib/site-packages/pip-10.0.1-py3.6.egg" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/-1270834059" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3.4" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional ASSOCIATED_PROJECT_PATH="J:/Progetti/areaGeografica" />
+    </jdk>
+  </component>
+</application>
