@@ -3,7 +3,11 @@
 **Progetto Scolastico**
 
 Componenti:
-- Igor Gargoyle
+- Enrico Bragastini
+- Igor Godoi
+- Davide Pizzoli
+- Riccardo Sartori
+
 
 Prova Git
 
