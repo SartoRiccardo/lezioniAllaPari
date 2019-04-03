@@ -7,6 +7,7 @@
     • Commentare ogni funzione
     • Commentare ogni passaggio che possa risultare complesso da leggere in seguito
     • Utilizzare nomi di variabili sensate e comprensibili
+    • Ad ogni update, aggiornare Trello!
 
 **Componenti gruppo:**
 - Enrico Bragastini
