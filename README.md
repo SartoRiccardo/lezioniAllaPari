@@ -1,6 +1,6 @@
 # READ ME
 
-##Progetto Scolastico
+## Progetto Scolastico
 
 ### WARNING!
     • Utilizzo del PEP8 obbligatorio
