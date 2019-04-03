@@ -3,8 +3,8 @@
 **Progetto Scolastico**
 
 Componenti:
-- Igor Gargoyle
+- Igor
 
 Prova Git
 
-Prova N.1 
+Prova N.1
