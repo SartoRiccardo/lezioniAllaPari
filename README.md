@@ -3,8 +3,10 @@
 **Progetto Scolastico**
 
 Componenti:
-- Igor
+- Enrico Bragastini
+- Igor Godoi
+- Davide Pizzoli
+- Riccardo Sartori
 
-Prova Git
 
-Prova N.1
+3/04/2018 Prova Git - Settings varie
