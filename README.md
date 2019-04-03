@@ -1,12 +1,9 @@
-## READ ME
+# READ ME
 
-**Progetto Scolastico**
+#### Progetto Scolastico
 
-Componenti:
+**Componenti:**
 - Enrico Bragastini
 - Igor Godoi
 - Davide Pizzoli
 - Riccardo Sartori
-
-
-3/04/2018 Prova Git - Settings varie
