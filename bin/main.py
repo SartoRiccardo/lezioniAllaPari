@@ -29,8 +29,11 @@ if __name__ == '__main__':
     Label(root, text="Cognome: " + user.getSurname()).pack()
     Label(root, text="Username: " + user.getUsername()).pack()
 
+    Label(root, text="\nClasse:").pack()
+    for classe in user.getClassed():
+        Label(root, text=classe).pack()
 
-
+    # GUI
 
     root.mainloop()
 

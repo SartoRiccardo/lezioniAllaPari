@@ -31,7 +31,7 @@ class Login():
         self.__login.mainloop()
 
     def __checkLogin(self):
-        user = self.__username.get()
+        user = self.__username.get().lower()
         password = self.__password.get()
 
         if(user == "" or password == ""):
@@ -42,10 +42,13 @@ class Login():
             for line in file:
                 line = line.replace("\n","")
                 line = line.split(";")
-                if(str(line[3]) == str(user) and str(line[4]) == str(password)):
-                    self.__user.setName(line[1])
-                    self.__user.setSurname(line[2])
-                    self.__user.setUsername(line[3])
+                if(str(line[3]).lower() == str(user) and str(line[4]) == str(password)):
+                    self.__user.setName(line[1])  # Nome
+                    self.__user.setSurname(line[2])  # Cognome
+                    self.__user.setUsername(line[3])  # Username
+                    self.__user.setState(line[0])  # Username
+                    for classe in line[5:]:  # Classi
+                        self.__user.addClass(classe)
 
                     self.__login.quit()  # Importante per far tornare in esecuzione root
                     self.__login.destroy()  # Chiudi finestra
@@ -56,4 +59,4 @@ class Login():
             messagebox.showinfo("Errore", "Username o Password errati")
 
     def closeAll(self):
-        self.__root.destroy()
+        sys.exit(0)

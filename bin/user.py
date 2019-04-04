@@ -7,7 +7,8 @@ class User():
 
         self.__class = []
 
-        self.addClass(classrooms)
+        for classroom in classrooms:
+            self.__class.append(classroom)
 
     def getName(self):
         return self.__name
@@ -18,6 +19,9 @@ class User():
     def getUsername(self):
         return self.__username
 
+    def getState(self):
+        return self.__state
+
     def setName(self, name):
         self.__name = name
 
@@ -27,11 +31,13 @@ class User():
     def setUsername(self, username):
         self.__username = username
 
-    def addClass(self, classrooms):
-        for classroom in classrooms:
-            self.__class.append(classroom)
+    def setState(self, state):
+        self.__state = state
 
-    def getClass(self):
+    def addClass(self, classroom):
+        self.__class.append(classroom)
+
+    def getClassed(self):
         return self.__class
 
     def isStudent(self):
