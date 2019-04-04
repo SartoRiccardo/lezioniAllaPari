@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.2 - 04/04/2019
+
+## Fixed
++ Se mettete le credenziali giuste, adesso non da errori
+
+---
+
 ## 0.0.1 - 03/04/2019
 
 ### Added

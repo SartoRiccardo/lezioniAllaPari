@@ -1,5 +1,6 @@
 # Pycharm
 .idea
+__pycache__
 
 # Automatically generated files - windows
 _windows

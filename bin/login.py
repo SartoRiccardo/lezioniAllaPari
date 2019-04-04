@@ -45,7 +45,7 @@ class Login():
                 if(str(line[3]) == str(user) and str(line[4]) == str(password)):
                     self.__root.deiconify()  # Mostra root
                     self.__login.destroy()  # Distruggi finestra
-                    break
+                    return
             messagebox.showinfo("Errore", "Username o Password errati")
 
     def closeAll(self):
