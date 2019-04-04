@@ -14,3 +14,6 @@ debugger.xml
 editor.xml
 filetypes.xml
 vcs.xml
+
+# Automatically generated files - mac OS
+.DS_Store
