@@ -2,12 +2,14 @@
 from tkinter import *
 from login import Login
 from user import User
+from view import View
 
 # Variabili
 boolD = True
 
 # Funzioni
-
+def close():
+    sys.exit(0)
 
 if __name__ == '__main__':
     if boolD:
@@ -18,6 +20,8 @@ if __name__ == '__main__':
     root.geometry("800x500")
     root.minsize(800, 500)
     #root.resizable(width="False", height="False")
+    root.protocol("WM_DELETE_WINDOW", close)  # Controllo su chiusura della finestra
+
     root.grab_set()  # Blocca root (non funziona, ma lo lascio)
     root.withdraw()  # Nascondi finestra fino al login
 
@@ -25,15 +29,9 @@ if __name__ == '__main__':
 
     login = Login(root, user)  # Apri login
 
-    Label(root, text="Nome: " + user.getName()).pack()
-    Label(root, text="Cognome: " + user.getSurname()).pack()
-    Label(root, text="Username: " + user.getUsername()).pack()
+    view = View(root, user)  # GUI
 
-    Label(root, text="\nClasse:").pack()
-    for classe in user.getClassed():
-        Label(root, text=classe).pack()
-
-    # GUI
+    # ...
 
     root.mainloop()
 
