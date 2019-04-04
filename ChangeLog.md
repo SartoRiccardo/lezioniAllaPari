@@ -3,7 +3,7 @@
 ## [0.0.2](https://github.com/SartoRiccardo/lezioniAllaPari/commit/d1dacbfbc57f7b517aa22784a29b25859c454ea9) - 04/04/2019
 
 ### Fixed
-+ Se mettete le credenziali giuste, adesso non da errori
++ All'immissione di credenziali corrette non visualizza più messaggio di errore
 
 ---
 
