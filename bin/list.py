@@ -1,7 +1,7 @@
 from tkinter import Listbox, END, EXTENDED, BOTH
 
 class List():
-    def __init__(self, root, list):
+    def __init__(self, root, list=""):
         self.__root = root
 
         self.__list = Listbox(self.__root, selectmode=EXTENDED)
