@@ -1,6 +1,7 @@
 Tipo;Nome;Cognome;Username;Password;Classi  # Riga non letta
 S;Easy;User;a;a;4BI
 S;Davide;Piz;pizidavi;12345678;4BI
-T;Grazia;Cob;gcobe;abcdfg;4BI;5AI;5BI;5CI;5DI
+T;Grazia;Cob;gcobe;abc;4BI;5AI;5BI;5CI;5DI
+T;Michele;Tecnico;mike;tech;
 S;Enrico;Braga;stini;87654321;4BI
-S;Grigor;Gargoyle;igor;nonhopiuidee;4BI
+S;Grigor;Gargoyle;igor;non;3BI

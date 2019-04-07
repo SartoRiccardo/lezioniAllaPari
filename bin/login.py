@@ -14,6 +14,8 @@ class Login():
         self.__login.resizable(width="False", height="False")
         self.__login.protocol("WM_DELETE_WINDOW", self.closeAll)  # Controllo su chiusura della finestra
 
+        self.__login.bind("<Return>", self.__checkLogin)  # Premuto tasto "Invio", controlla login
+
         # Username
         Label(self.__login, text="Esegui il login\n").pack()
         Label(self.__login, text="Username").pack()
@@ -30,7 +32,12 @@ class Login():
 
         self.__login.mainloop()
 
-    def __checkLogin(self):
+    def __checkLogin(self, event=""):
+        '''
+        Controlla login inserito
+        :param event: Evento (lasciare)
+        :return: Boolean
+        '''
         user = self.__username.get().lower()
         password = self.__password.get()
 
@@ -55,7 +62,7 @@ class Login():
 
                     self.__root.grab_release()  # Sblocca root (non funziona, ma lo lascio)
                     self.__root.deiconify()  # Mostra root
-                    return
+                    return True
             messagebox.showinfo("Errore", "Username o Password errati")
 
     def closeAll(self):

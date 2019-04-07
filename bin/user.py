@@ -37,7 +37,7 @@ class User():
     def addClass(self, classroom):
         self.__class.append(classroom)
 
-    def getClassed(self):
+    def getClass(self):
         return self.__class
 
     def isStudent(self):
