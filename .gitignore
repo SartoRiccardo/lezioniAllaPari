@@ -1,8 +1,8 @@
-# Pycharm
+# Pycharm Files
 .idea
 __pycache__
 
-# Automatically generated files - windows
+# Windows Files
 _windows
 __windows
 codestyles
@@ -15,5 +15,5 @@ editor.xml
 filetypes.xml
 vcs.xml
 
-# Automatically generated files - mac OS
+# MacOS Files
 .DS_Store

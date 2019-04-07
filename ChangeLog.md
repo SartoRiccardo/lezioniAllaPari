@@ -1,5 +1,20 @@
 # Change Log
 
+## [0.0.3](https://github.com/SartoRiccardo/lezioniAllaPari/commit/4c0bf5b15edc1242cefdd05be8c5dd2e072fce48) - 07/04/2019
+
+## Added
++ Controll Class
++ Lessons Class
++ List Class
++ Nel Login è possibile premere "Invio" per accedere
++ Alcune Lezioni di test
+
+## Changed
++ Il Main instanzia solo oggetto Controll
++ In User il nome della funzione "getClassed" è stato cambiato in "getClass"
+
+---
+
 ## [0.0.2](https://github.com/SartoRiccardo/lezioniAllaPari/commit/d1dacbfbc57f7b517aa22784a29b25859c454ea9) - 04/04/2019
 
 ### Fixed
