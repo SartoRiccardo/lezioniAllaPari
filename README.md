@@ -1,6 +1,6 @@
 # READ ME
 
-## Progetto Scolastico [TRELLO](https://trello.com/lezioniallapari/home)
+## Progetto Scolastico
 
 ### WARNING!
     • Utilizzo del PEP8
