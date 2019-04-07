@@ -20,7 +20,8 @@ class Control():
 
         self.__login = Login(self.__root, self.__user)  # Apri login e carica dati User
 
-        self.__lessons = self.__getElements(self.__lessonsDir)  # Carica lezioni per utente
+        self.__lessons = self.__getElements(self.__lessonsDir)  # Carica lezioni
+        #self.__lessons = self.__getElements(self.__lessonsDir)  # Carica test
 
         self.__view.setUser(self.__user, self.__lessons)  # Setta User e lezioni
 
