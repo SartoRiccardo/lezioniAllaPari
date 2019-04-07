@@ -1,5 +1,5 @@
 from tkinter import Tk, sys
-from os import *
+from os import listdir
 from login import Login
 from view import View
 from user import User
