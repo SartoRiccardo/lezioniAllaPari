@@ -1,8 +1,9 @@
 from tkinter import Tk, sys
 from os import *
 from login import Login
-from user import User
 from view import View
+from user import User
+from lesson import Lesson
 
 class Control():
     def __init__(self):
@@ -48,13 +49,18 @@ class Control():
             elif(item[0][4] == "none"):  # Nessuna classe
                 continue
             else:
-                right = self.__checkClass(item)  # Visibile a classe
+                right = self.__checkOwn(item)  # Proprietario
                 if not(right):
-                    right = self.__checkOwn(item)  # Proprietario
+                    right = self.__checkClass(item)  # Visibile a classe
 
             if not(right):
                 continue
-            list.append(item[0])
+
+            lesson = Lesson(item[0][0],item[0][1],item[0][2],item[0][3])  # Crea oggetto Lezione
+            for classroom in item[0][4:]:
+                lesson.addClass(classroom)
+
+            list.append(lesson)
         return list
 
     def __checkClass(self, item):

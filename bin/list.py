@@ -9,4 +9,4 @@ class List():
         self.__list.pack(fill=BOTH, expand=1)
 
         for item in list:
-            self.__list.insert(END, item)
+            self.__list.insert(END, str(item))
