@@ -39,7 +39,7 @@ class LoginView:
         user = self.__username.get().lower()
         password = self.__password.get()
 
-        if(user != "" and password != ""):
+        if user != "" and password != "":
             userLogged = self.__control.login(user, password)
 
             if userLogged is None:
