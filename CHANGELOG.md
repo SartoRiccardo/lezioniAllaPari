@@ -1,16 +1,30 @@
 # Change Log
 
+# Unreleased
+
+## 0.1.0
+
+### Added
++ Nuove eccezioni per rendere il codice più leggibile
+
+### Changed
++ Adesso ci sono Control e View separati per la schermata di login
+
+---
+
+# Released
+
 ## [0.0.3](https://github.com/SartoRiccardo/lezioniAllaPari/commit/4c0bf5b15edc1242cefdd05be8c5dd2e072fce48) - 07/04/2019
 
-## Added
-+ Controll Class
+### Added
++ Control Class
 + Lessons Class
 + List Class
 + Nel Login è possibile premere "Invio" per accedere
 + Alcune Lezioni di test
 
-## Changed
-+ Il Main instanzia solo oggetto Controll
+### Changed
++ Il Main instanzia solo oggetto Control
 + In User il nome della funzione "getClassed" è stato cambiato in "getClass"
 
 ---

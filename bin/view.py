@@ -14,6 +14,9 @@ class View:
         self.__frame = Frame(self.__root)
         self.__frame.pack()
 
+        self.__user = None
+        self.__list = None
+
     def setUser(self, user, lessons):
 
         Label(self.__frame, text="Nome: " + user.getName()).pack()

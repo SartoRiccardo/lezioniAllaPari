@@ -47,4 +47,4 @@ class User:
             return False
 
     def __str__(self):
-        return self.__name + " " + self.__surname + " " + self.__username + " " + str(self.__class)
+        return f"User nome={self.__name} cognome={self.__surname} username={self.__username} classi={self.__class}"

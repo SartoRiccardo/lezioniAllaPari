@@ -1,58 +1,50 @@
-from tkinter import messagebox, sys
+from user import User
 from login_view import LoginView
+from exceptions import EmptyFieldException
 
 
 class LoginControl:
     __CREDENTIALS = "config/login.csv"
 
-    def __init__(self, root, user):
-        self.__root = root
-        self.__user = user
+    def __init__(self, root):
+        self.__view = LoginView(root, self)
+        self.__loggedUser = None
 
-        self.__view = LoginView(self.__root)
-        self.__view.getView().protocol("WM_DELETE_WINDOW", self.closeAll)  # Controllo su chiusura della finestra
+        self.__view.mainloop()
 
-        self.__view.getView().bind("<Return>", self.__login)  # Premuto tasto "Invio", controlla login
-        self.__view.getLoginButton().config(command=self.__login)
-
-        self.__view.getView().mainloop()
-
-    def __login(self, event=""):
+    def login(self, user: str, password: str):
         """
         Guarda se le credenziali sono corrette
-        :param user: Username
-        :param password: Password
+        :param user: l'username dell'utente
+        :param password: la password dell'utente
         :return: un oggetto User, None se i dati inseriti non sono validi
         """
-        user = self.__view.getUsername()
-        password = self.__view.getPassword()
+        if user == "":
+            raise EmptyFieldException("Username should not be an empty string")
+        if password == "":
+            raise EmptyFieldException("Password should not be an empty string")
 
-        if user == "" or password == "":
-            messagebox.showinfo("Errore", "Riempire tutti i campi")
-        else:
-            file = open(LoginControl.__CREDENTIALS, "r")
-            file.readline()
-            for line in file:
-                line = line.replace("\n", "").split(";")
-                if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
+        file = open(LoginControl.__CREDENTIALS, "r")
+        file.readline()
+        for line in file:
+            line = line.replace("\n", "").split(";")
+            if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
+                ret = User(line[1], line[2], line[3], line[0])
+                for classroom in line[5:]:
+                    ret.addClass(classroom)
+                return ret
 
-                    self.__user.setName(line[1])  # Nome
-                    self.__user.setSurname(line[2])  # Cognome
-                    self.__user.setUsername(line[3])  # Username
-                    self.__user.setState(line[0])  # Stato
-                    for classroom in line[5:]:
-                        self.__user.addClass(classroom)
+    def logInAs(self, user: User):
+        """
+        Effettua la procedura di login
+        :param user: l'utente loggato
+        """
+        self.__loggedUser = user
+        self.__view.quit()
 
-                    self.__close()
-                    return
-            messagebox.showinfo("Errore", "Username o Password errati")
+    def getLoggedUser(self):
+        return self.__loggedUser
 
-    def __close(self):
-        self.__view.getView().quit()  # Importante per far tornare in esecuzione root
-        self.__view.getView().destroy()  # Chiudi finestra
+    def setLoggedUser(self, user: User):
+        self.__loggedUser = user
 
-        self.__root.grab_release()  # Sblocca root (non funziona, ma lo lascio)
-        self.__root.deiconify()  # Mostra root
-
-    def closeAll(self):
-        sys.exit(0)

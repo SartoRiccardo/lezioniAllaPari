@@ -9,23 +9,17 @@ from lesson import Lesson
 class Control:
     __LESSONS_DIR = "lessons/"
     __TEST_DIR = "test/"
-    __CREDENTIALS = "config/login.csv"
 
     def __init__(self):
-
         self.__root = Tk()
-        #self.__root.protocol("WM_DELETE_WINDOW", self.close)  # Controllo su chiusura della finestra
-        self.__root.grab_set()  # Blocca root (non funziona, ma lo lascio)
-        self.__root.withdraw()  # Nascondi finestra fino al login
+#       self.__root.protocol("WM_DELETE_WINDOW", self.close)  # Controllo su chiusura della finestra
+
+        self.__login = LoginControl(self.__root)
+        self.__user = self.__login.getLoggedUser()
 
         self.__view = View(self.__root)  # GUI
-
-        self.__user = User()
-
-        self.__login = LoginControl(self.__root, self.__user)  # Apri login e carica dati User
-
         self.__lessons = self.__getElements(Control.__LESSONS_DIR)  # Carica lezioni
-        #self.__lessons = self.__getElements(Control.__TEST_DIR)  # Carica test
+#       self.__lessons = self.__getElements(Control.__TEST_DIR)  # Carica test
 
         self.__view.setUser(self.__user, self.__lessons)  # Setta User e lezioni
 
