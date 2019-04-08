@@ -12,7 +12,7 @@ if __name__ == '__main__':
     if boolD:
         print("Inizio Programma\n")
 
-    c = LoginControl()
+    c = Control()
 
     if boolD:
         print("\nFine Programma")

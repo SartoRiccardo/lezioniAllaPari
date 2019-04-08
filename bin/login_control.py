@@ -1,17 +1,16 @@
 from user import User
 from login_view import LoginView
-from tkinter import *
+from exceptions import EmptyFieldException
 
 
 class LoginControl:
     __CREDENTIALS = "config/login.csv"
 
-    def __init__(self):
-        root = Tk()
-        root.grab_set()  # Blocca root
-        root.withdraw()  # Nascondi finestra fino al login
+    def __init__(self, root):
+        self.__view = LoginView(root, self)
+        self.__loggedUser = None
 
-        LoginView(root, self)
+        self.__view.mainloop()
 
     def login(self, user: str, password: str):
         """
@@ -20,15 +19,28 @@ class LoginControl:
         :param password: la password dell'utente
         :return: un oggetto User, None se i dati inseriti non sono validi
         """
-        if user == "" or password == "":
-            return None
-        else:
-            file = open(LoginControl.__CREDENTIALS, "r")
-            file.readline()
-            for line in file:
-                line = line.replace("\n", "").split(";")
-                if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
-                    ret = User(line[1], line[2], line[3], line[0])
-                    for classroom in line[5:]:
-                        ret.addClass(classroom)
-                    return ret
+        if user == "":
+            raise EmptyFieldException("Username should not be an empty string")
+        if password == "":
+            raise EmptyFieldException("Password should not be an empty string")
+
+        file = open(LoginControl.__CREDENTIALS, "r")
+        file.readline()
+        for line in file:
+            line = line.replace("\n", "").split(";")
+            if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
+                ret = User(line[1], line[2], line[3], line[0])
+                for classroom in line[5:]:
+                    ret.addClass(classroom)
+                return ret
+
+    def logInAs(self, user: User):
+        self.__loggedUser = user
+        self.__view.quit()
+
+    def getLoggedUser(self):
+        return self.__loggedUser
+
+    def setLoggedUser(self, user: User):
+        self.__loggedUser = user
+
