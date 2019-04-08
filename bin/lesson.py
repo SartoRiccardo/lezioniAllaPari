@@ -1,4 +1,4 @@
-class Lesson():
+class Lesson:
     def __init__(self, title, start, end, owner, *classrooms):
         self.__title = title
         self.__start = start
@@ -40,4 +40,4 @@ class Lesson():
         self.__owner = owner
 
     def __str__(self):
-        return self.__title+" - Scadenza: "+self.__end
+        return f"{self.__title} - Scadenza: {self.__end}"

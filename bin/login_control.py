@@ -35,6 +35,10 @@ class LoginControl:
                 return ret
 
     def logInAs(self, user: User):
+        """
+        Effettua la procedura di login
+        :param user: l'utente loggato
+        """
         self.__loggedUser = user
         self.__view.quit()
 
