@@ -1,4 +1,4 @@
-class Lesson():
+class Lesson:
     def __init__(self, title, start, end, owner, *classrooms):
         self.__title = title
         self.__start = start

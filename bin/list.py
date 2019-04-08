@@ -1,6 +1,7 @@
 from tkinter import Listbox, END, EXTENDED, BOTH
 
-class List():
+
+class List:
     def __init__(self, root, list="", test=""):
         self.__root = root
 

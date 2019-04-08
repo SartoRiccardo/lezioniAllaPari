@@ -1,19 +1,15 @@
-from tkinter import *
-from tkinter import messagebox
+from tkinter import Toplevel, Label, Entry, Button
 
 
 class LoginView:
-    def __init__(self, root, control):
+    def __init__(self, root):
         self.__root = root
-        self.__control = control
+        #self.__control = control
 
         self.__login = Toplevel(self.__root)
         self.__login.title("Login")
         self.__login.geometry("300x250")
         self.__login.resizable(width="False", height="False")
-        self.__login.protocol("WM_DELETE_WINDOW", self.closeAll)  # Controllo su chiusura della finestra
-
-        self.__login.bind("<Return>", self.__checkLogin)  # Premuto tasto "Invio", controlla login
 
         # Username
         Label(self.__login, text="Esegui il login\n").pack()
@@ -27,46 +23,17 @@ class LoginView:
         self.__password.pack()
 
         Label(self.__login, text="").pack()
-        Button(self.__login, text="Login", width=10, height=1, command=self.__checkLogin).pack()
+        self.__loginBtn = Button(self.__login, text="Login", width=10, height=1)
+        self.__loginBtn.pack()
 
-        self.__login.mainloop()
+    def getView(self):
+        return self.__login
 
-    def __checkLogin(self, event=""):
-        """
-        Controlla login inserito
-        :param event: Evento (lasciare)
-        :return: Boolean
-        """
-        user = self.__username.get().lower()
-        password = self.__password.get()
+    def getLoginButton(self):
+        return self.__loginBtn
 
-        usr = self.__control.login(user, password)
-        print(usr)
+    def getUsername(self):
+        return self.__username.get().lower()
 
-        '''
-        if user == "" or password == "":
-            messagebox.showinfo("Errore", "Riempire tutti i campi")
-        else:
-            file = open(Login.__FILE, "r")
-            file.readline()
-            for line in file:
-                line = line.replace("\n", "").split(";")
-                if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
-                    self.__user.setName(line[1])  # Nome
-                    self.__user.setSurname(line[2])  # Cognome
-                    self.__user.setUsername(line[3])  # Username
-                    self.__user.setState(line[0])  # State
-                    for classe in line[5:]:  # Classi
-                        self.__user.addClass(classe)
-
-                    self.__login.quit()  # Importante per far tornare in esecuzione root
-                    self.__login.destroy()  # Chiudi finestra
-
-                    self.__root.grab_release()  # Sblocca root (non funziona, ma lo lascio)
-                    self.__root.deiconify()  # Mostra root
-                    return True
-            messagebox.showinfo("Errore", "Username o Password errati")
-        '''
-
-    def closeAll(self):
-        sys.exit(0)
+    def getPassword(self):
+        return self.__password.get()

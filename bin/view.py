@@ -1,7 +1,8 @@
 from tkinter import *
 from list import List
 
-class View():
+
+class View:
     def __init__(self, root):
         self.__root = root
 
@@ -14,7 +15,6 @@ class View():
         self.__frame.pack()
 
     def setUser(self, user, lessons):
-        self.__user = user
 
         Label(self.__frame, text="Nome: " + user.getName()).pack()
         Label(self.__frame, text="Cognome: " + user.getSurname()).pack()
