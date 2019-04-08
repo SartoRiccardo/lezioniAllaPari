@@ -1,6 +1,5 @@
 # Import
 from control import Control
-from login_control import *
 
 # Variabili
 boolD = False

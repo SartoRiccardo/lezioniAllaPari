@@ -18,13 +18,14 @@ class View:
         self.__list = None
 
     def setUser(self, user, lessons):
+        self.__user = user
 
-        Label(self.__frame, text="Nome: " + user.getName()).pack()
-        Label(self.__frame, text="Cognome: " + user.getSurname()).pack()
-        Label(self.__frame, text="Username: " + user.getUsername()).pack()
+        Label(self.__frame, text="Nome: " + self.__user.getName()).pack()
+        Label(self.__frame, text="Cognome: " + self.__user.getSurname()).pack()
+        Label(self.__frame, text="Username: " + self.__user.getUsername()).pack()
 
         Label(self.__frame, text="\nClasse:").pack()
-        for classroom in user.getClass():
+        for classroom in self.__user.getClass():
             Label(self.__frame, text=classroom).pack()
 
         self.__list = List(self.__frame, lessons)  # Carica lista elementi

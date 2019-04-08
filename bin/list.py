@@ -2,7 +2,7 @@ from tkinter import Listbox, END, EXTENDED, BOTH
 
 
 class List:
-    def __init__(self, root, array=None, test=""):
+    def __init__(self, root, array=[]):
         self.__root = root
 
         self.__list = Listbox(self.__root, selectmode=EXTENDED)

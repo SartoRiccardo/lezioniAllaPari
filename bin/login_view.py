@@ -1,15 +1,11 @@
 from tkinter import *
 from tkinter import messagebox
-from exceptions import EmptyFieldException
 
 
 class LoginView:
     def __init__(self, root, control):
         self.__root = root
         self.__control = control
-
-        self.__root.grab_set()  # Blocca root
-        self.__root.withdraw()  # Nascondi finestra fino al login
 
         self.__login = Toplevel(self.__root)
         self.__login.title("Login")
@@ -30,6 +26,7 @@ class LoginView:
         self.__password = Entry(self.__login, show='•', justify='center')
         self.__password.pack()
 
+        # Login
         Label(self.__login, text="").pack()
         Button(self.__login, text="Login", width=10, height=1, command=self.__checkLogin).pack()
 
@@ -42,15 +39,15 @@ class LoginView:
         user = self.__username.get().lower()
         password = self.__password.get()
 
-        try:
-            usr = self.__control.login(user, password)
+        if(user != "" and password != ""):
+            userLogged = self.__control.login(user, password)
 
-            if usr is None:
-                messagebox.showinfo("Errore", "Credenziali sbagliate")
+            if userLogged is None:
+                messagebox.showinfo("Errore", "Credenziali errate")
             else:
-                self.__control.logInAs(usr)
+                self.__control.logInAs(userLogged)
 
-        except EmptyFieldException:
+        else:
             messagebox.showinfo("Errore", "Riempire tutti i campi")
 
     def mainloop(self):
@@ -60,7 +57,7 @@ class LoginView:
         self.__root.grab_release()  # Sblocca root
         self.__root.deiconify()  # Mostra root
 
-        self.__login.quit()  # Importante per far tornare in esecuzione root
+        self.__login.quit()  # Tornare in esecuzione root
         self.__login.destroy()  # Chiudi finestra
 
     def closeAll(self):
