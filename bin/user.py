@@ -41,10 +41,10 @@ class User():
         return self.__class
 
     def isStudent(self):
-        if(self.__state == "S"):
+        if self.__state == "S":
             return True
         else:
             return False
 
     def __str__(self):
-        return self.__name + " " + self.__surname + " " + self.__username
+        return self.__name + " " + self.__surname + " " + self.__username + " " + str(self.__class)
