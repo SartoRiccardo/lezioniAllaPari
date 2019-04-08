@@ -6,7 +6,11 @@ from tkinter import *
 class LoginControl:
     __CREDENTIALS = "config/login.csv"
 
-    def __init__(self, root):
+    def __init__(self):
+        root = Tk()
+        root.grab_set()  # Blocca root
+        root.withdraw()  # Nascondi finestra fino al login
+
         LoginView(root, self)
 
     def login(self, user: str, password: str):
