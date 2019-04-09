@@ -40,4 +40,4 @@ class Lesson:
         self.__owner = owner
 
     def __str__(self):
-        return f"{self.__title} - Scadenza: {self.__end}"
+        return "{self.__title} - Scadenza: {self.__end}"
