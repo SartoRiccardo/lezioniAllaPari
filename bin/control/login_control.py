@@ -1,6 +1,6 @@
 from objects.user import User
 from view.login_view import LoginView
-# from exceptions import EmptyFieldException
+from exceptions import EmptyFieldException
 
 
 class LoginControl:
@@ -20,10 +20,10 @@ class LoginControl:
         :param password: la password dell'utente
         :return: un oggetto User, None se i dati inseriti non sono validi
         """
-        # if user == "":
-        #     raise EmptyFieldException("Username should not be an empty string")
-        # if password == "":
-        #     raise EmptyFieldException("Password should not be an empty string")
+        if user == "":
+            raise EmptyFieldException("Username should not be an empty string")
+        if password == "":
+            raise EmptyFieldException("Password should not be an empty string")
 
         file = open(LoginControl.__CREDENTIALS, "r")
         file.readline()
@@ -42,6 +42,8 @@ class LoginControl:
         Effettua la procedura di login
         :param user: l'utente loggato
         """
+        if user is None:
+            pass
         self.__loggedUser = user
         self.__view.quit()
 
@@ -49,4 +51,6 @@ class LoginControl:
         return self.__loggedUser
 
     def setLoggedUser(self, user: User):
+        if user is None:
+            pass
         self.__loggedUser = user

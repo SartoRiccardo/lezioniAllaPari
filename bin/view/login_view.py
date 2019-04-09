@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from exceptions import EmptyFieldException
 
 
 class LoginView:
@@ -35,24 +36,25 @@ class LoginView:
         """
         Controlla login inserito
         :param event: Evento (lasciare)
-        :return: Boolean
         """
         user = self.__username.get().lower()
         password = self.__password.get()
 
-        if user != "" and password != "":
+        try:
             userLogged = self.__control.login(user, password)
 
+            # TODO fare magari un'altra exception che gestisca il caso in cui
+            # userLogged è None. Così si farebbe un controllo in meno nel view
             if userLogged is None:
                 messagebox.showinfo("Errore", "Credenziali errate")
             else:
                 self.__control.logInAs(userLogged)
 
-        else:
+        except EmptyFieldException:
             messagebox.showinfo("Errore", "Riempire tutti i campi")
 
     def mainloop(self):
-        self.__root.mainloop()
+        self.__login.mainloop()
 
     def quit(self):
         self.__root.grab_release()  # Sblocca root
