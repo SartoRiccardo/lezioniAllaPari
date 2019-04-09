@@ -19,6 +19,7 @@ class LoginView:
         Label(self.__login, text="Esegui il login\n").pack()
         Label(self.__login, text="Username").pack()
         self.__username = Entry(self.__login, justify='center')
+        self.__username.focus()
         self.__username.pack()
 
         # Password
