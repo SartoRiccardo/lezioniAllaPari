@@ -6,8 +6,8 @@ from objects.lesson import Lesson
 
 
 class Control:
-    __LESSONS_DIR = "lessons/"
-    __TEST_DIR = "test/"
+    __LESSONS_DIR = "file/lessons/"
+    __TEST_DIR = "file/test/"
 
     def __init__(self):
         self.__root = Tk()
