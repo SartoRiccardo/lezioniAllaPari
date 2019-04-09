@@ -1,5 +1,5 @@
 from tkinter import *
-from list import List
+from objects.list import List
 
 
 class View:

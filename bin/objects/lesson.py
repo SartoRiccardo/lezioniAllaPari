@@ -40,4 +40,4 @@ class Lesson:
         self.__owner = owner
 
     def __str__(self):
-        return "{self.__title} - Scadenza: {self.__end}"
+        return "{} - Scadenza: {}".format(self.__title, self.__end)

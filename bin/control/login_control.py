@@ -1,5 +1,5 @@
-from user import User
-from login_view import LoginView
+from objects.user import User
+from view.login_view import LoginView
 # from exceptions import EmptyFieldException
 
 

@@ -1,5 +1,5 @@
 # Import
-from control import Control
+from control.control import Control
 
 # Variabili
 boolD = False

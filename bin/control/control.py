@@ -1,8 +1,8 @@
 from tkinter import Tk, sys
 from os import listdir
-from login_control import LoginControl
-from view import View
-from lesson import Lesson
+from control.login_control import LoginControl
+from view.view import View
+from objects.lesson import Lesson
 
 
 class Control:
