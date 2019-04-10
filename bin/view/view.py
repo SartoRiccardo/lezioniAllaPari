@@ -29,3 +29,6 @@ class View:
             Label(self.__frame, text=classroom).pack()
 
         self.__list = List(self.__frame, lessons)  # Carica lista elementi
+
+        if user.getState() == "T":
+            Button(self.__frame, text="New Lesson", width=10, height=1).pack()
