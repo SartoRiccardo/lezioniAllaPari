@@ -3,8 +3,9 @@ from objects.list import List
 
 
 class View:
-    def __init__(self, root):
+    def __init__(self, root, control):
         self.__root = root
+        self.__control = control
 
         self.__root.title("Lezioni alla Pari")
         self.__root.geometry("800x500")
@@ -31,4 +32,6 @@ class View:
         self.__list = List(self.__frame, lessons)  # Carica lista elementi
 
         if user.getState() == "T":
-            Button(self.__frame, text="New Lesson", width=10, height=1).pack()
+            addItemButton = Button(self.__frame, text="New Lesson", width=10, height=1)
+            addItemButton.bind("<Button-1>", self.__control.addToList)
+            addItemButton.pack()

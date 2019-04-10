@@ -4,6 +4,7 @@ from datetime import datetime
 from control.login_control import LoginControl
 from view.view import View
 from objects.lesson import Lesson
+from control.newLesson_control import NewLessonControl
 
 
 class Control:
@@ -20,7 +21,7 @@ class Control:
         self.__login = LoginControl(self.__root)
         self.__user = self.__login.getLoggedUser()
 
-        self.__view = View(self.__root)  # GUI
+        self.__view = View(self.__root, self)  # GUI
 
         self.__lessons = self.__getElements()  # Carica lezioni
         # self.__lessons = self.__getElements(Control.__LESSONS_DIR)  # Carica lezioni
@@ -85,3 +86,6 @@ class Control:
                 if classroom == userClass:
                     return True
         return False
+
+    def addToList(self, e):
+        newLessonView = NewLessonControl(self.__root)
