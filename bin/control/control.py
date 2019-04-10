@@ -39,7 +39,7 @@ class Control:
         file.readline()  # Rimuove prima riga
 
         for line in file:
-            line = line.replace("\n","").split(";")
+            line = line.replace("\n", "").split(";")
 
             if line[6] == "all":  # Tutte le classi
                 right = True
@@ -66,38 +66,6 @@ class Control:
 
             list.append(element)
         return list
-
-    # def __getElements(self, dir):
-    #     """
-    #     Controlla la lista (lezioni o test), divide l'estensione, divide per '_' ed esegue i controlli
-    #     :param dir: Directory
-    #     :return: Lista dei file di proprieta o che può visualizzare
-    #     """
-    #     elements = listdir(dir)
-    #     list = []
-    #
-    #     for item in elements:
-    #         item = item.split(".")
-    #         item[0] = item[0].split("_")
-    #
-            # if item[0][4] == "all":  # Tutte le classi
-            #     right = True
-            # elif item[0][4] == "none":  # Nessuna classe
-            #     continue
-            # else:
-            #     right = self.__checkOwn(item)  # Proprietario
-            #     if not right:
-            #         right = self.__checkClass(item)  # Visibile a classe
-            #
-            # if not right:
-            #     continue
-            #
-            # lesson = Lesson(item[0][0], item[0][1], item[0][2], item[0][3])  # Crea oggetto Lezione
-            # for classroom in item[0][4:]:
-            #     lesson.addClass(classroom)
-            #
-            # list.append(lesson)
-    #     return list
 
     def __checkOwn(self, item, position):
         if item[position] == self.__user.getUsername():
