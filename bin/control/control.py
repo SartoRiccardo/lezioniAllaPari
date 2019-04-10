@@ -35,6 +35,10 @@ class Control:
         sys.exit(0)
 
     def __getElements(self):
+        """
+        Legge "index.csv", trova Lezione/Test visibile a User
+        :return: Lezione/Test visibile a User
+        """
         list = []
         file = open(Control.__INDEX, "r")
 
@@ -87,5 +91,5 @@ class Control:
                     return True
         return False
 
-    def addToList(self, e):
-        newLessonView = NewLessonControl(self.__root)
+    def newLesson(self, e=None):
+        NewLessonControl(self.__root)

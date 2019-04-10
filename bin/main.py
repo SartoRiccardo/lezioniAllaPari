@@ -11,7 +11,7 @@ if __name__ == '__main__':
     if boolD:
         print("Inizio Programma\n")
 
-    c = Control()
+    Control()
 
     if boolD:
         print("\nFine Programma")
