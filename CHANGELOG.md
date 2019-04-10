@@ -2,7 +2,7 @@
 
 # Unreleased
 
-## 0.0.4
+## 0.1.0
 
 ### Added
 + Nuove eccezioni per rendere il codice più leggibile
