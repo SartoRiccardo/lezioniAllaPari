@@ -1,6 +1,5 @@
 Tipo;Nome;Cognome;Username;Password;Classi  # Riga non letta
 S;Easy;User;a;a;4BI
-T;Preside;P;preside;best;
 S;Davide;Piz;pizidavi;12345678;4BI
 T;Grazia;Cob;gcobe;abc;4BI;5AI;5BI;5CI;5DI
 T;Grosso;Tri;tricheco;qwerty;3BI;4BI

@@ -1,5 +1,6 @@
 from tkinter import Tk, sys
 # from os import listdir
+from datetime import datetime
 from control.login_control import LoginControl
 from view.view import View
 from objects.lesson import Lesson
@@ -47,10 +48,10 @@ class Control:
                 continue
             else:
                 right = self.__checkOwn(line, 5)  # Proprietario
-                # if not right:
-                #     right = self.__checkDate(line)  # Data superiore a corrente
                 if not right:
                     right = self.__checkClass(line, 6)  # Visibile a classe
+                    if right:
+                        right = self.__checkDate(line, 3)  # Data superiore a corrente
 
             if not right:
                 continue
@@ -72,8 +73,11 @@ class Control:
             return True
         return False
 
-    def __checkDate(self, item):
-        pass
+    def __checkDate(self, item, position):
+        if int(item[position]) <= datetime.timestamp(datetime.now()):
+            return True
+        else:
+            return False
 
     def __checkClass(self, item, position):
         for classroom in item[position:]:
