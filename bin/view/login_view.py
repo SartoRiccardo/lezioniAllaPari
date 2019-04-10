@@ -42,16 +42,13 @@ class LoginView:
 
         try:
             userLogged = self.__control.login(user, password)
+            self.__control.logInAs(userLogged)
 
-            # TODO fare magari un'altra exception che gestisca il caso in cui
-            # userLogged è None. Così si farebbe un controllo in meno nel view
-            if userLogged is None:
+        except (EmptyFieldException, TypeError) as err:
+            if isinstance(err, EmptyFieldException):
+                messagebox.showinfo("Errore", "Riempire tutti i campi")
+            elif isinstance(err, TypeError):
                 messagebox.showinfo("Errore", "Credenziali errate")
-            else:
-                self.__control.logInAs(userLogged)
-
-        except EmptyFieldException:
-            messagebox.showinfo("Errore", "Riempire tutti i campi")
 
     def mainloop(self):
         self.__login.mainloop()

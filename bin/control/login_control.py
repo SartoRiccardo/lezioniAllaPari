@@ -42,8 +42,8 @@ class LoginControl:
         Effettua la procedura di login
         :param user: l'utente loggato
         """
-        if user is None:
-            pass
+        if not isinstance(user, User):
+            raise TypeError("Expected user, got {} instead".format(type(user).__name__))
         self.__loggedUser = user
         self.__view.quit()
 
@@ -51,6 +51,6 @@ class LoginControl:
         return self.__loggedUser
 
     def setLoggedUser(self, user: User):
-        if user is None:
-            pass
+        if not isinstance(user, User):
+            raise TypeError("Expected User, got {} instead".format(type(user).__name__))
         self.__loggedUser = user
