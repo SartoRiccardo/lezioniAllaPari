@@ -1,1 +1,7 @@
-N;Titolo;DataInizio;DataFine;Proprietario;Classi
+N;Tipo;Titolo;DataInizio;DataFine;Proprietario;Classi
+1;L;Lezioni1;1554876926;1555876926;gcobe;4BI;5BI;5AI
+2;L;Lezione2;1554876926;1555876926;mike;all
+3;L;Circolare;1554876926;1555876926;preside;none
+4;L;Lezione3;1554876926;1555876926;tricheco;3BI
+5;L;Lezione4;1554876926;1555876926;gcobe;5AI
+6;L;Lezione5;1554876926;1555876926;tricheco;4BI
