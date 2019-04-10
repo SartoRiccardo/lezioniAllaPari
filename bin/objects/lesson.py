@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Lesson:
     def __init__(self, title, start, end, owner, *classrooms):
         self.__title = title
@@ -15,11 +18,11 @@ class Lesson:
     def getTitle(self):
         return self.__title
 
-    def getEnd(self):
-        return self.__end
-
     def getStart(self):
-        return self.__start
+        return datetime.fromtimestamp(int(self.__start))
+
+    def getEnd(self):
+        return datetime.fromtimestamp(int(self.__end))
 
     def getOwner(self):
         return self.__owner
@@ -40,4 +43,4 @@ class Lesson:
         self.__owner = owner
 
     def __str__(self):
-        return "{} - Scadenza: {}".format(self.__title, self.__end)
+        return "{} - Scadenza: {}".format(self.__title, self.getEnd())
