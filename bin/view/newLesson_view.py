@@ -42,7 +42,7 @@ class NewLessonView:
         # Anno
         Label(self.__newLesson, text="Anno").grid(row=3, column=0, columnspan=1)
 
-        self.__yearStart = box.Combobox(self.__newLesson, values=self.__getYears())
+        self.__yearStart = box.Combobox(self.__newLesson, values=self.__getYears(), state="readonly")
         self.__yearStart.current(0)
         self.__yearStart.bind("<<ComboboxSelected>>", self.__control.setYearStart)
         self.__yearStart.grid(row=3, column=1, columnspan=1)
@@ -50,14 +50,14 @@ class NewLessonView:
         # Mese
         Label(self.__newLesson, text="Mese").grid(row=4, column=0, columnspan=1)
 
-        self.__monthStart = box.Combobox(self.__newLesson, values=self.__MESI)
+        self.__monthStart = box.Combobox(self.__newLesson, values=self.__MESI, state="readonly")
         self.__monthStart.bind("<<ComboboxSelected>>", self.__control.setMonthStart)
         self.__monthStart.grid(row=4, column=1, columnspan=1)
 
         # Giorno
         Label(self.__newLesson, text="Giorno").grid(row=5, column=0, columnspan=1)
 
-        self.__dayStart = box.Combobox(self.__newLesson, values=[1])
+        self.__dayStart = box.Combobox(self.__newLesson, values=[1], state="readonly")
         self.__dayStart.current(0)
         self.__dayStart.bind("<<ComboboxSelected>>", self.__control.setDayStart)
         self.__dayStart.grid(row=5, column=1, columnspan=1)
@@ -68,7 +68,7 @@ class NewLessonView:
         # Anno
         Label(self.__newLesson, text="Anno").grid(row=3, column=2, columnspan=1)
 
-        self.__yearEnd = box.Combobox(self.__newLesson, values=self.__getYears())
+        self.__yearEnd = box.Combobox(self.__newLesson, values=self.__getYears(), state="readonly")
         self.__yearEnd.current(0)
         self.__yearEnd.bind("<<ComboboxSelected>>", self.__control.setYearEnd)
         self.__yearEnd.grid(row=3, column=3, columnspan=1)
@@ -76,7 +76,7 @@ class NewLessonView:
         # Mese
         Label(self.__newLesson, text="Mese").grid(row=4, column=2, columnspan=1)
 
-        self.__monthEnd = box.Combobox(self.__newLesson, values=self.__MESI)
+        self.__monthEnd = box.Combobox(self.__newLesson, values=self.__MESI, state="readonly")
         self.__monthEnd.current(0)
         self.__monthEnd.bind("<<ComboboxSelected>>", self.__control.setMonthEnd)
         self.__monthEnd.grid(row=4, column=3, columnspan=1)
@@ -84,7 +84,7 @@ class NewLessonView:
         # Giorno
         Label(self.__newLesson, text="Giorno").grid(row=5, column=2, columnspan=1)
 
-        self.__dayEnd = box.Combobox(self.__newLesson, values=[1])
+        self.__dayEnd = box.Combobox(self.__newLesson, values=[1], state="readonly")
         self.__dayEnd.current(0)
         self.__dayEnd.bind("<<ComboboxSelected>>", self.__control.setDayEnd)
         self.__dayEnd.grid(row=5, column=3, columnspan=1)

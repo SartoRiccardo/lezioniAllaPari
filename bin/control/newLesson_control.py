@@ -4,7 +4,7 @@ from view.newLesson_view import NewLessonView
 
 class NewLessonControl:
 
-    __MESI = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    __MESI = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     def __init__(self, root):
         self.__newLesson = NewLessonView(root, self)
@@ -47,6 +47,7 @@ class NewLessonControl:
 
     def setYearEnd(self, e):
         self.__yearEnd = int(self.__newLesson.getYearsEnd().get())
+        self.setViewDayEnd()
 
     def setViewDayStart(self):
         """
@@ -54,6 +55,7 @@ class NewLessonControl:
         """
         day = self.__getDays(self.__monthStart, self.__yearStart)
         self.__newLesson.getDayStart().config(value=day)
+        self.__newLesson.getDayStart().current(0)  # Evita un bug
 
     def setViewDayEnd(self):
         """
@@ -62,6 +64,7 @@ class NewLessonControl:
         """
         day = self.__getDays(self.__monthEnd, self.__yearEnd)
         self.__newLesson.getDayEnd().config(value=day)
+        self.__newLesson.getDayEnd().current(0)  # Evita un bug
 
     def __isBisestile(self, year):
         if year % 400 == 0 and year % 100 == 0:
