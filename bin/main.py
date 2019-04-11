@@ -5,7 +5,7 @@ from control.control import Control
 boolD = False
 
 # Funzioni
-
+    
 
 if __name__ == '__main__':
     if boolD:
