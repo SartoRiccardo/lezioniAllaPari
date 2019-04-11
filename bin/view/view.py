@@ -38,3 +38,6 @@ class View:
 
         if user.getState() == "T":
             Button(self.__frame, text="Nuova Lezione", width=10, height=1, command=self.__control.newLesson).pack()
+
+    def getList(self):
+        return self.__list

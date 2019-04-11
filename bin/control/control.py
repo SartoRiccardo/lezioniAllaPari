@@ -24,15 +24,28 @@ class Control:
         self.__view = View(self.__root, self)  # GUI
 
         self.__lessons = self.__getElements()  # Carica lezioni
-        # self.__lessons = self.__getElements(Control.__LESSONS_DIR)  # Carica lezioni
-        # self.__lessons = self.__getElements(Control.__TEST_DIR)  # Carica test
 
         self.__view.setUser(self.__user, self.__lessons)  # Setta User e lezioni
 
+        self.__list = self.__view.getList()  # Oggetto Lista
+        self.__list.getList().bind("<Double-Button-1>", self.__openElement)
+
         self.__root.mainloop()
 
-    def close(self):
-        sys.exit(0)
+    def __openElement(self, e=None):
+        """
+        Doppio click su un elemento della list stampa a video (temporaneo) il contenuto del file associato
+        :param e: Evento
+        """
+        id = self.__list.getSelectedElement().getID()
+        if type(self.__list.getSelectedElement()) == Lesson:  # Lezioni
+            directory = self.__LESSONS_DIR + id + ".txt"
+        else:  # Test
+            directory = self.__TEST_DIR + id + ".json"
+
+        file = open(directory, "r")
+        for line in file:
+            print(line, end="")
 
     def __getElements(self):
         """
@@ -63,7 +76,7 @@ class Control:
 
             element = None
             if line[1] == "L":  # Lezione
-                element = Lesson(line[2], line[3], line[4], line[5])  # Crea oggetto Lezione
+                element = Lesson(line[0], line[2], line[3], line[4], line[5])  # Crea oggetto Lezione
                 for classroom in line[6:]:
                     element.addClass(classroom)
 
@@ -93,3 +106,6 @@ class Control:
 
     def newLesson(self, e=None):
         NewLessonControl(self.__root)
+
+    def close(self, e=None):
+        sys.exit(0)
