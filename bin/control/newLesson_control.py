@@ -27,6 +27,8 @@ class NewLessonControl:
         self.setViewDayEnd()  # Setta giorni
         self.__newLesson.getDayEnd().current(self.__dayEnd - 1)  # Giorno corrente come prima scelta
 
+        self.__newLesson.focus()
+
     def setDayStart(self, e):
         self.__dayStart = int(self.__newLesson.getDayStart().get())
 

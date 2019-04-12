@@ -1,13 +1,11 @@
 from objects.user import User
 from view.login_view import LoginView
 from exceptions import EmptyFieldException
+from control.io_manager import login
 
 
 class LoginControl:
-    __CREDENTIALS = "config/login.csv"
-
     def __init__(self, root):
-
         self.__view = LoginView(root, self)
         self.__loggedUser = None
 
@@ -25,17 +23,7 @@ class LoginControl:
         if password == "":
             raise EmptyFieldException("Password should not be an empty string")
 
-        file = open(LoginControl.__CREDENTIALS, "r")
-        file.readline()
-        for line in file:
-            line = line.replace("\n", "").split(";")
-            if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
-
-                loggedUser = User(line[1], line[2], line[3], line[0])
-
-                for classroom in line[5:]:
-                    loggedUser.addClass(classroom)
-                return loggedUser
+        return login(user, password)
 
     def logInAs(self, user: User):
         """

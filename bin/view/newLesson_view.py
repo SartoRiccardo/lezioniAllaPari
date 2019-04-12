@@ -19,7 +19,7 @@ class NewLessonView:
         "Dicembre"
     ]
 
-    def __init__(self, root, control):
+    def __init__(self, root: Tk, control):
         self.__root = root
         self.__control = control
 
@@ -115,3 +115,9 @@ class NewLessonView:
         for i in range(n):
             years.append(i+year)
         return years
+
+    def focus(self):
+        self.__newLesson.grab_set()
+
+    def quit(self):
+        pass

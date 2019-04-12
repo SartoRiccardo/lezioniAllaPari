@@ -9,6 +9,7 @@
 
 ### Changed
 + Adesso ci sono Control e View separati per la schermata di login
++ Le operazioni di I/O adesso vengono gestite a parte
 
 ---
 
