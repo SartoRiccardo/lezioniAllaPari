@@ -36,7 +36,7 @@ class View:
 
         self.__list = List(self.__frame, lessons)  # Carica lista elementi
 
-        if user.getState() == "T":
+        if user.getState() != "S":
             Button(self.__frame, text="Nuova Lezione", width=10, height=1, command=self.__control.newLesson).pack()
 
     def getList(self):

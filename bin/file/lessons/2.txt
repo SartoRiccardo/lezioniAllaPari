@@ -1,18 +1,5 @@
-# Titolo
+# Laboratorio
 
-## Indice
+Si raccomanda un **adeguato** comportamento nei laboratori scolastici
 
-- Argomento1
-- Argomento2
-
----
-
-## Argomento1
-
-Argomento
-
----
-
-## Argomento2
-
-Argomento
+_Mike_

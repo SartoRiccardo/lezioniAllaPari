@@ -1,8 +1,9 @@
 from tkinter import Tk, sys
+from control.io_manager import *
 from control.login_control import LoginControl
 from view.view import View
+from view.lesson_view import LessonView
 from control.newLesson_control import NewLessonControl
-from control.io_manager import *
 
 
 class Control:
@@ -27,9 +28,9 @@ class Control:
         self.__root.mainloop()
 
     def __openElement(self, e=None):
-        content = getLesson(self.__list.getSelectedElement())
-        for ln in content.split("\n"):
-            print(ln)
+        title = self.__list.getSelectedElement().getTitle()
+        content = getLesson(self.__list.getSelectedElement())  # Lezione
+        LessonView(self.__root, title, content)
 
     def newLesson(self, e=None):
         NewLessonControl(self.__root)

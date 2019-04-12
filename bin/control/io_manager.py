@@ -1,7 +1,7 @@
 from datetime import datetime
+from markdown import markdown
 import objects.user
 import objects.lesson
-from os import listdir
 
 
 def login(user: str, password: str):
@@ -45,7 +45,7 @@ def getLesson(lesson):
     directory = LESSONS_DIR + lesson.getID() + ".txt"
 
     file = open(directory, "r")
-    return file.read()
+    return markdown(file.read())
 
 
 def saveLesson(lesson):

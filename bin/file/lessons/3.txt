@@ -1,18 +1,12 @@
-# Titolo
+# Circolare
 
-## Indice
+## Classi:
 
-- Argomento1
-- Argomento2
-
----
-
-## Argomento1
-
-Argomento
+- 3BI
+- 4BI
 
 ---
 
-## Argomento2
+### La classe e' autorizzata a uscire alle ore 11.50 del giorno 22-04-2019
 
-Argomento
+_Preside_
