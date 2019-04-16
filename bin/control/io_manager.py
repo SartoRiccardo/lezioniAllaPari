@@ -4,28 +4,6 @@ import objects.user
 import objects.lesson
 
 
-def login(user: str, password: str):
-    """
-    Guarda se le credenziali sono corrette
-    :param user: l'username dell'utente
-    :param password: la password dell'utente
-    :return: un oggetto User, None se i dati inseriti non sono validi
-    """
-    CREDENTIALS = "config/login.csv"
-
-    file = open(CREDENTIALS, "r")
-    file.readline()
-    for line in file:
-        line = line.replace("\n", "").split(";")
-        if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
-
-            loggedUser = objects.user.User(line[1], line[2], line[3], line[0])
-
-            for classroom in line[5:]:
-                loggedUser.addClass(classroom)
-            return loggedUser
-
-
 def getTest(test):
     pass
 
@@ -42,7 +20,7 @@ def getLesson(lesson):
     """
     LESSONS_DIR = "file/lessons/"
 
-    directory = LESSONS_DIR + lesson.getID() + ".txt"
+    directory = LESSONS_DIR + lesson.getID() + ".md"
 
     file = open(directory, "r")
     return markdown(file.read())
@@ -52,6 +30,25 @@ def saveLesson(lesson):
     pass
 
 
+def getLastID():
+    """
+    Trova il più grande ID inserito (l'ultimo)
+    :return: int
+    """
+    INDEX = "file/index.csv"
+    last_ID = 0
+
+    file = open(INDEX, "r")
+
+    file.readline()  # Rimuove prima riga
+
+    for line in file:
+        line = line.split(";")
+        if int(line[0]) > last_ID:
+            last_ID = int(line[0])
+    return last_ID
+
+
 def getElementsVisibleTo(user):
     """
     Legge "index.csv", trova Lezione/Test visibile a user
@@ -59,12 +56,24 @@ def getElementsVisibleTo(user):
     :return: Lezione/Test visibile a User
     """
     def checkOwn(item, position):
+        """
+        Corrispondenza proprietario lezione/test
+        :param item: Array
+        :param position: Posizione elemento
+        :return: Boolean
+        """
         nonlocal user
         if item[position] == user.getUsername():
             return True
         return False
 
     def checkDate(item, position):
+        """
+        Corrispondenza data lezione/test
+        :param item: Array
+        :param position: Posizione elemento
+        :return: Boolean
+        """
         nonlocal user
         if int(item[position]) <= datetime.timestamp(datetime.now()):
             return True
@@ -72,6 +81,12 @@ def getElementsVisibleTo(user):
             return False
 
     def checkClass(item, position):
+        """
+        Corrispondenza classe lezione/test
+        :param item: Array
+        :param position: Inizio posizione elementi
+        :return: Boolean
+        """
         nonlocal user
         for classroom in item[position:]:
             for userClass in user.getClass():
@@ -113,3 +128,25 @@ def getElementsVisibleTo(user):
 
         array.append(element)
     return array
+
+
+def login(user: str, password: str):
+    """
+    Guarda se le credenziali sono corrette
+    :param user: l'username dell'utente
+    :param password: la password dell'utente
+    :return: un oggetto User, None se i dati inseriti non sono validi
+    """
+    CREDENTIALS = "config/login.csv"
+
+    file = open(CREDENTIALS, "r")
+    file.readline()
+    for line in file:
+        line = line.replace("\n", "").split(";")
+        if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
+
+            loggedUser = objects.user.User(line[1], line[2], line[3], line[0])
+
+            for classroom in line[5:]:
+                loggedUser.addClass(classroom)
+            return loggedUser

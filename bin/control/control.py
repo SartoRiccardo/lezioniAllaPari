@@ -1,7 +1,7 @@
 from tkinter import Tk, sys
-from control.io_manager import *
 from control.login_control import LoginControl
 from view.view import View
+from control.io_manager import getLesson, getElementsVisibleTo
 from view.lesson_view import LessonView
 from control.newLesson_control import NewLessonControl
 
@@ -9,16 +9,14 @@ from control.newLesson_control import NewLessonControl
 class Control:
     def __init__(self):
         self.__root = Tk()
-        self.__root.grab_set()  # Blocca root
-        self.__root.withdraw()  # Nascondi finestra fino al login
         # self.__root.protocol("WM_DELETE_WINDOW", self.close)  # Controllo su chiusura della finestra
 
-        self.__login = LoginControl(self.__root)
+        self.__view = View(self.__root, self)  # GUI root
+
+        self.__login = LoginControl(self.__root)  # Login
         self.__user = self.__login.getLoggedUser()
 
-        self.__view = View(self.__root, self)  # GUI
-
-        self.__visibleElements = getElementsVisibleTo(self.__user)  # Carica lezioni/test
+        self.__visibleElements = getElementsVisibleTo(self.__user)  # Carica lezioni/test da visualizzare
 
         self.__view.setUser(self.__user, self.__visibleElements)  # Setta User e lezioni
 
@@ -28,9 +26,9 @@ class Control:
         self.__root.mainloop()
 
     def __openElement(self, e=None):
-        title = self.__list.getSelectedElement().getTitle()
-        content = getLesson(self.__list.getSelectedElement())  # Lezione
-        LessonView(self.__root, title, content)
+        lessonTitle = self.__list.getSelectedElement().getTitle()
+        lessonContent = getLesson(self.__list.getSelectedElement())  # Lezione
+        LessonView(self.__root, lessonTitle, lessonContent)
 
     def newLesson(self, e=None):
         NewLessonControl(self.__root)

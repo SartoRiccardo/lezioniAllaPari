@@ -1,5 +1,6 @@
-from tkinter import *
+from tkinter import Toplevel, BOTH
 from tkinterhtml import HtmlFrame
+
 
 class LessonView:
     def __init__(self, root, title, content):

@@ -1,5 +1,6 @@
 from datetime import datetime
 from view.newLesson_view import NewLessonView
+from control.io_manager import saveLesson
 
 
 class NewLessonControl:
