@@ -2,14 +2,16 @@
 
 # Unreleased
 
-## 0.0.4
+## 0.0.5
 
 ### Added
++ Visualizzatore Lezioni
++ Lezioni di Esempio
 + Nuove eccezioni per rendere il codice più leggibile
 
 ### Changed
 + Adesso ci sono Control e View separati per la schermata di login
-+ Le operazioni di I/O adesso vengono gestite a parte
++ Le operazioni di I/O vengono gestite a parte
 
 ---
 
