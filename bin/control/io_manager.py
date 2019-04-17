@@ -165,9 +165,8 @@ def getElementsVisibleTo(user):
 
         element = None
         if line[1] == "L":  # Lezione
-            element = objects.lesson.Lesson(line[0], line[2], line[3], line[4], line[5])  # Crea oggetto Lezione
-            for classroom in line[6:]:
-                element.addClass(classroom)
+            element = objects.lesson.Lesson(line[0], line[2], line[3],
+                                            line[4], line[5], line[6:])  # Crea oggetto Lezione
         elif line[1] == "T":  # Test
             pass
 
@@ -192,10 +191,7 @@ def login(user: str, password: str):
         line = line.replace("\n", "").split(";")
         if str(line[3]).lower() == str(user) and str(line[4]) == str(password):
 
-            loggedUser = objects.user.User(line[1], line[2], line[3], line[0])
-
-            for classroom in line[5:]:
-                loggedUser.addClass(classroom)
+            loggedUser = objects.user.User(line[1], line[2], line[3], line[0], line[5:])
 
             file.close()
             return loggedUser

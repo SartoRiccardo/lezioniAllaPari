@@ -1,4 +1,5 @@
 from datetime import datetime
+from copy import deepcopy
 
 
 class Lesson:
@@ -9,9 +10,10 @@ class Lesson:
         self.__end = end
         self.__owner = owner
 
-        self.__class = []
-        for classroom in classrooms:
-            self.__class.append(classroom)
+        if len(classrooms) == 1 and isinstance(classrooms[0], list):
+            self.__class = deepcopy(classrooms[0])
+        else:
+            self.__class = list(classrooms)
 
     def getID(self):
         return self.__id
