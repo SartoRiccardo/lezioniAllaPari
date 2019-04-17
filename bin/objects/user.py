@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class User:
     def __init__(self, name="", surname="", username="", state="S", *classrooms):
         self.__name = name
@@ -5,10 +8,10 @@ class User:
         self.__username = username
         self.__state = state
 
-        self.__class = []
-
-        for classroom in classrooms:
-            self.__class.append(classroom)
+        if len(classrooms) == 1 and isinstance(classrooms[0], list):
+            self.__class = deepcopy(classrooms[0])
+        else:
+            self.__class = list(classrooms)
 
     def getName(self):
         return self.__name
@@ -21,6 +24,9 @@ class User:
 
     def getState(self):
         return self.__state
+
+    def getClass(self):
+        return self.__class
 
     def setName(self, name):
         self.__name = name
@@ -36,9 +42,6 @@ class User:
 
     def addClass(self, classroom):
         self.__class.append(classroom)
-
-    def getClass(self):
-        return self.__class
 
     def isStudent(self):
         if self.__state == "S":
