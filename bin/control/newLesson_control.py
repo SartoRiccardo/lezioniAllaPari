@@ -7,8 +7,8 @@ class NewLessonControl:
 
     __MESI = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    def __init__(self, root):
-        self.__newLesson = NewLessonView(root, self)
+    def __init__(self, root, user):
+        self.__newLesson = NewLessonView(root, user, self)
 
         # Inizio
         self.__yearStart = int(datetime.now().year)

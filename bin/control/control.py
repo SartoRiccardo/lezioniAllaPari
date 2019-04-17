@@ -31,7 +31,7 @@ class Control:
         LessonView(self.__root, lessonTitle, lessonContent)
 
     def newLesson(self, e=None):
-        NewLessonControl(self.__root)
+        NewLessonControl(self.__root, self.__user)
 
     def close(self, e=None):
         sys.exit(0)

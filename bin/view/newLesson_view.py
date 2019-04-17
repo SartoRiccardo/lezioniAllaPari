@@ -1,40 +1,32 @@
 from tkinter import *
 from tkinter import ttk as box
 from datetime import datetime
+from control.io_manager import saveLesson
 
 
 class NewLessonView:
     __MESI = [
-        "Gennaio",
-        "Febbraio",
-        "Marzo",
-        "Aprile",
-        "Maggio",
-        "Giugno",
-        "Luglio",
-        "Agosto",
-        "Settembre",
-        "Ottobre",
-        "Novembre",
-        "Dicembre"
+        "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+        "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
     ]
 
-    def __init__(self, root: Tk, control):
+    def __init__(self, root: Tk, user, control):
         self.__root = root
         self.__control = control
+        self.__user = user
 
         self.__newLesson = Toplevel(self.__root)
         self.__newLesson.title("Nuova lezione")
-        self.__newLesson.geometry("500x350")
-        self.__newLesson.minsize(width=500,height=350)
+        self.__newLesson.geometry("1150x500")
+        # self.__newLesson.minsize(width=500, height=350)
         self.__newLesson.resizable(False, False)
 
         Label(self.__newLesson, text="\nNUOVA LEZIONE\n").grid(row=0, column=0, columnspan=4)
 
-        Label(self.__newLesson, text="Titolo").grid(row=1, column=0, columnspan=1)
+        Label(self.__newLesson, text="Titolo").grid(row=1, column=1, columnspan=1)
         self.__title = Entry(self.__newLesson, justify="center")
         self.__title.focus()
-        self.__title.grid(row=1, column=1, columnspan=1)
+        self.__title.grid(row=1, column=2, columnspan=1)
 
         # Data Inizio
         Label(self.__newLesson, text="DATA DI INIZIO").grid(row=2, column=0, columnspan=2)
@@ -89,7 +81,25 @@ class NewLessonView:
         self.__dayEnd.bind("<<ComboboxSelected>>", self.__control.setDayEnd)
         self.__dayEnd.grid(row=5, column=3, columnspan=1)
 
-        self.__create = Button(self.__newLesson, text="Crea", width=10, height=1)  # Nuova lezione
+        self.__classiSel = []       # variabili di stato dei checkbox (1 se selezionato, altrimenti 0)
+        Label(self.__newLesson, text="Classi").grid(row=6, column=0, columnspan=4)
+        for lesson in self.__user.getClass():
+            index = self.__user.getClass().index(lesson)
+            self.__classiSel.append(IntVar())
+            riga = int(index / 5)
+            colonna = index % 5
+            Checkbutton(self.__newLesson, text=lesson, variable=self.__classiSel[index]).grid(row=7+riga, column=colonna)
+
+        self.__create = Button(self.__newLesson, text="CREA", width=10, height=1)  # Nuova lezione
+        self.__create.grid(row=7+len(self.__classiSel), column=0, columnspan=4)
+
+        self.__scroll = Scrollbar(self.__newLesson)
+        self.__scroll.grid(row=1, column=7, rowspan=10, sticky=N+S)
+
+        self.__inputText = Text(self.__newLesson, width=75, yscrollcommand=self.__scroll.set)
+        self.__inputText.grid(row=1, column=6, rowspan=10)
+
+        self.__scroll.config(command=self.__inputText.yview)
 
     def getDayStart(self):
         return self.__dayStart
