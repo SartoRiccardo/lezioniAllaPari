@@ -1,5 +1,5 @@
 from tkinter import Toplevel, BOTH
-from tkinterhtml import HtmlFrame
+from tk_html_widgets import HTMLLabel
 
 
 class LessonView:
@@ -13,8 +13,10 @@ class LessonView:
         self.__view.geometry("700x600")
         self.__view.minsize(width=500, height=500)
 
-        self.__web = HtmlFrame(self.__view, horizontal_scrollbar="auto")
-        self.__web.set_content(self.__content)
-        self.__web.pack(expand=1, fill=BOTH)
+
+
+        self.__html = HTMLLabel(self.__view, html=self.__content, bg="white")
+        self.__html.fit_height()
+        self.__html.pack(fill=BOTH, expand=True, padx=20, pady=10)
 
         self.__view.mainloop()
