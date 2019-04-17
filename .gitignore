@@ -2,6 +2,7 @@
 .idea
 __pycache__
 codestyles
+customization.xml
 
 # Windows Files
 _windows
