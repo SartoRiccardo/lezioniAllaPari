@@ -1,5 +1,6 @@
 from datetime import datetime
 from markdown import markdown
+import os
 import objects.user
 import objects.lesson
 
@@ -23,11 +24,53 @@ def getLesson(lesson):
     directory = LESSONS_DIR + lesson.getID() + ".md"
 
     file = open(directory, "r")
-    return markdown(file.read())
+    ret = markdown(file.read())
+    file.close()
+    return ret
 
 
-def saveLesson(lesson):
-    pass
+def saveLesson(lesson, content):
+    """
+    Salva una lezione
+    :param lesson: Lesson, la lezione da salvare
+    :param content: il contenuto della lezione
+    :return: None
+    """
+    LESSONS_DIR = "file/lessons/"
+    INDEX_DIR = "file/index.csv"
+    INDEX_BACKUP_DIR = INDEX_DIR.replace("index.csv", "index_backup.csv")
+
+    out = open(LESSONS_DIR + lesson.getID() + ".md", "w")
+    out.write(content)
+    out.close()
+
+    newline = "{};L;{};{};{};{};{}\n".format(
+                lesson.getID(),
+                lesson.getTitle(),
+                lesson.getStart(),
+                lesson.getEnd(),
+                lesson.getOwner(),
+                lesson.getClass(";".join(lesson.getClass()))
+            )
+
+    index = open(INDEX_DIR)
+    index_backup = open(INDEX_BACKUP_DIR, "w")
+    for ln in index:
+        index_backup.write(ln)
+    index.close()
+    index_backup.close()
+
+    index = open(INDEX_DIR, "w")
+    index_backup = open(INDEX_BACKUP_DIR)
+    for ln in index_backup:
+        if ln.split(";")[0] == newline.split(";")[0]:
+            index.write(newline)
+        else:
+            index.write(ln)
+    index.close()
+    index_backup.close()
+
+    os.remove(INDEX_BACKUP_DIR)
 
 
 def getLastID():
@@ -46,6 +89,8 @@ def getLastID():
         line = line.split(";")
         if int(line[0]) > last_ID:
             last_ID = int(line[0])
+
+    file.close()
     return last_ID
 
 
@@ -127,6 +172,8 @@ def getElementsVisibleTo(user):
             pass
 
         array.append(element)
+
+    file.close()
     return array
 
 
@@ -149,4 +196,9 @@ def login(user: str, password: str):
 
             for classroom in line[5:]:
                 loggedUser.addClass(classroom)
+
+            file.close()
             return loggedUser
+
+    file.close()
+    return None
