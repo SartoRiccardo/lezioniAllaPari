@@ -1,6 +1,7 @@
 # Pycharm Files
 .idea
 __pycache__
+codestyles
 
 # Windows Files
 _windows
