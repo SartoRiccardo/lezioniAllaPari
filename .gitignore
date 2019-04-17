@@ -1,9 +1,19 @@
-# Pycharm
+# Pycharm Files
 .idea
+__pycache__
 
-# Automatically generated files - windows
+# Windows Files
 _windows
+__windows
 codestyles
 debugger.xml
 filetypes.xml
 ide.general.xml
+code.style.schemes.xml
+debugger.xml
+editor.xml
+filetypes.xml
+vcs.xml
+
+# MacOS Files
+.DS_Store
