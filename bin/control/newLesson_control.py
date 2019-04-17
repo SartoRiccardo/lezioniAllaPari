@@ -7,8 +7,8 @@ class NewLessonControl:
 
     __MESI = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    def __init__(self, root):
-        self.__newLesson = NewLessonView(root, self)
+    def __init__(self, root, user):
+        self.__newLesson = NewLessonView(root, user, self)
 
         # Inizio
         self.__yearStart = int(datetime.now().year)
@@ -86,3 +86,12 @@ class NewLessonControl:
         for i in range(n):
             days.append(i+1)
         return days
+
+    def addNewLesson(self):
+        print("Nuova lezione: " + self.__newLesson.getTitle())
+        print(str(self.__newLesson.getDayStart().get()) + " " + str(self.__newLesson.getMonthStart().get()) + ""
+              " " + str(self.__newLesson.getYearsStart().get()), end=" | ")
+        print(str(self.__newLesson.getDayEnd().get()) + " " + str(self.__newLesson.getMonthEnd().get()) + " "
+              "" + str(self.__newLesson.getYearsEnd().get()))
+        print(self.__newLesson.getClassList())
+        print(self.__newLesson.getLessonContent())
