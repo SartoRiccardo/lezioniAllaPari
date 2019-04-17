@@ -1,0 +1,2 @@
+Markdown==3.1
+tkinterhtml==0.7
