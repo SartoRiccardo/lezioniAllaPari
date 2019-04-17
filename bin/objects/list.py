@@ -1,12 +1,17 @@
-from tkinter import Listbox, END, SINGLE
+from tkinter import Listbox, Scrollbar, END, SINGLE
 
 
 class List:
     def __init__(self, root, array=[]):
         self.__root = root
 
+        self.__scrollbar = Scrollbar(self.__root)
+
         self.__list = Listbox(self.__root, selectmode=SINGLE)
-        self.__list.config(width=40)
+
+        self.__scrollbar.config(command=self.__list.yview)
+
+        self.__list.config(width=40, yscrollcommand=self.__scrollbar.set)
         self.__list.pack()
 
         self.__lessons = [x for x in array]
