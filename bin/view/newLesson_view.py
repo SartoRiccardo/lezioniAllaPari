@@ -90,7 +90,7 @@ class NewLessonView:
             colonna = index % 5
             Checkbutton(self.__newLesson, text=lesson, variable=self.__classiSel[index]).grid(row=7+riga, column=colonna)
 
-        self.__create = Button(self.__newLesson, text="CREA", width=10, height=1)  # Nuova lezione
+        self.__create = Button(self.__newLesson, text="CREA", width=10, height=1, command=self.__control.addNewLesson)  # Nuova lezione
         self.__create.grid(row=7+len(self.__classiSel), column=0, columnspan=4)
 
         self.__scroll = Scrollbar(self.__newLesson)
@@ -125,6 +125,28 @@ class NewLessonView:
         for i in range(n):
             years.append(i+year)
         return years
+
+    def getTitle(self):
+        return self.__title.get()
+
+    def getLessonContent(self):
+        """
+        Restituisce il contenuto dell'oggetto self.__inputText di tipo Text
+        :return: (stringa)
+        """
+        return self.__inputText.get("1.0", END)
+
+    def getClassList(self):
+        """
+        Restituisce un array di stringhe con le classi selezionate
+        :return: r (array di stringhe)
+        """
+        classList = self.__user.getClass()
+        r = []
+        for c in range(len(self.__classiSel)):
+            if self.__classiSel[c].get() == 1:
+                r.append(classList[c])
+        return r
 
     def focus(self):
         self.__newLesson.grab_set()
