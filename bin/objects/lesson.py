@@ -7,3 +7,6 @@ class Lesson(Element):
 
         for classroom in classrooms:
             self.addClass(classroom)
+
+    def __str__(self):
+        return "{} - Scadenza: {}".format(super().getTitle(), super().getEnd())

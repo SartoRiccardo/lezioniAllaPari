@@ -1,8 +1,9 @@
+from abc import ABC, abstractmethod
 from datetime import datetime
 from copy import deepcopy
 
 
-class Element:
+class Element(ABC):
     def __init__(self, id, title, start, end, owner, *classrooms):
         self.__id = id
         self.__title = title
@@ -51,5 +52,6 @@ class Element:
     def setOwner(self, owner):
         self.__owner = owner
 
+    @abstractmethod
     def __str__(self):
-        return "{} - Scadenza: {}".format(self.__title, self.getEnd())
+        pass
