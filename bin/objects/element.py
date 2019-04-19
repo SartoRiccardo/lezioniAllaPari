@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from datetime import datetime
 from copy import deepcopy
 
 
@@ -26,10 +25,10 @@ class Element(ABC):
         return self.__class
 
     def getStart(self):
-        return datetime.fromtimestamp(int(self.__start))
+        return self.__start
 
     def getEnd(self):
-        return datetime.fromtimestamp(int(self.__end))
+        return self.__end
 
     def getOwner(self):
         return self.__owner

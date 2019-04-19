@@ -1,6 +1,6 @@
 from datetime import datetime
 from markdown import markdown
-import os
+from os import remove
 import objects.user
 import objects.lesson
 
@@ -9,7 +9,7 @@ def getTest(test):
     pass
 
 
-def saveTest(test):
+def saveTest(test, content):
     pass
 
 
@@ -50,7 +50,7 @@ def saveLesson(lesson, content):
                 lesson.getStart(),
                 lesson.getEnd(),
                 lesson.getOwner(),
-                lesson.getClass(";".join(lesson.getClass()))
+                ";".join(lesson.getClass())
             )
 
     index = open(INDEX_DIR)
@@ -62,15 +62,21 @@ def saveLesson(lesson, content):
 
     index = open(INDEX_DIR, "w")
     index_backup = open(INDEX_BACKUP_DIR)
+    found = False
     for ln in index_backup:
         if ln.split(";")[0] == newline.split(";")[0]:
             index.write(newline)
+            found = True
         else:
             index.write(ln)
+
+    if not found:
+        index.write(newline)
+
     index.close()
     index_backup.close()
 
-    os.remove(INDEX_BACKUP_DIR)
+    remove(INDEX_BACKUP_DIR)
 
 
 def getLastID():
