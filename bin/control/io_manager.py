@@ -114,7 +114,7 @@ def getElementsVisibleTo(user):
         :return: Boolean
         """
         nonlocal user
-        if item[position] == user.getUsername():
+        if user.getState() == "A" or item[position] == user.getUsername():
             return True
         return False
 
