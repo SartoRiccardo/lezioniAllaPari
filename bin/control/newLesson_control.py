@@ -19,9 +19,7 @@ class NewLessonControl:
         :param text:
         :return:
         """
-        accenti = {
-
-        }
+        pass
 
     def addNewLesson(self):
         newId = getLastID() + 1
