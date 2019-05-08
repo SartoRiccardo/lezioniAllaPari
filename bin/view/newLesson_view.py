@@ -3,11 +3,6 @@ from tkcalendar import DateEntry
 
 
 class NewLessonView:
-    __MESI = [
-        "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
-        "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
-    ]
-
     def __init__(self, root: Tk, user, control):
         self.__root = root
         self.__control = control
@@ -30,7 +25,7 @@ class NewLessonView:
         Label(self.__newLesson, text="DATA DI INIZIO").grid(row=2, column=0, columnspan=2)
 
         self.__calcStart = DateEntry(self.__newLesson, width=20,
-                        firstweekday="monday", showweeknumbers=False, showothermonthdays=False, locale="it_it",
+                        firstweekday="monday", showweeknumbers=False, showothermonthdays=True, locale="it_it",
                         selectmode="None", background='darkblue', foreground='white', borderwidth=2,
                         state="readonly")
         self.__calcStart.grid(row=3, column=1, columnspan=1)
@@ -39,7 +34,7 @@ class NewLessonView:
         Label(self.__newLesson, text="DATA DI FINE").grid(row=2, column=2, columnspan=2)
 
         self.__calcEnd = DateEntry(self.__newLesson, width=20,
-                         firstweekday="monday", showweeknumbers=False, showothermonthdays=False, locale="it_it",
+                         firstweekday="monday", showweeknumbers=False, showothermonthdays=True, locale="it_it",
                          selectmode="None", background='darkblue', foreground='white', borderwidth=2,
                          state="readonly")
         self.__calcEnd.grid(row=3, column=3, columnspan=1)

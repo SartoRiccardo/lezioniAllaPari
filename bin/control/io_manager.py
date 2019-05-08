@@ -1,5 +1,6 @@
 from datetime import datetime
 from markdown import markdown
+from bs4 import BeautifulSoup
 from os import remove
 import objects.user
 import objects.lesson
@@ -23,8 +24,20 @@ def getLesson(lesson):
 
     directory = LESSONS_DIR + lesson.getID() + ".md"
 
-    file = open(directory, "r")
-    ret = markdown(file.read())
+    file = open(directory, "r", encoding="utf-8")
+
+    string = ""
+
+    for content in file:
+        content = content.replace("\n", "")
+        bs = BeautifulSoup(content, features="html.parser")
+        content = str(bs.encode("ascii"))[2:-1]
+        string += content+"\n"
+
+    print(string)
+
+    ret = markdown(string)
+    print(ret)
     file.close()
     return ret
 
