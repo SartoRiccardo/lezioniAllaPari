@@ -32,9 +32,12 @@ class View:
         Label(self.__frame, text="Cognome: " + self.__user.getSurname()).pack()
         Label(self.__frame, text="Username: " + self.__user.getUsername()).pack()
 
-        Label(self.__frame, text="\nClasse:").pack()
+        classes = "Classi: " if len(self.__user.getClass()) > 1 else "Classe: "
         for classroom in self.__user.getClass():
-            Label(self.__frame, text=classroom).pack()
+            classes += classroom
+            if classroom != self.__user.getClass()[-1]:
+                 classes += ", "
+        Label(self.__frame, text=classes).pack()
 
         self.__list = List(self.__frame, lessons)  # Carica lista elementi
 
