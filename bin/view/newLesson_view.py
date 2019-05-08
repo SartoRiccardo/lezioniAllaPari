@@ -1,12 +1,8 @@
 from tkinter import *
 from tkcalendar import DateEntry
-
+from tkinter import messagebox
 
 class NewLessonView:
-    __MESI = [
-        "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
-        "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
-    ]
 
     def __init__(self, root: Tk, user, control):
         self.__root = root
@@ -94,8 +90,14 @@ class NewLessonView:
                 r.append(classList[c])
         return r
 
+    def mainloop(self):
+        self.__newLesson.mainloop()
+
     def focus(self):
         self.__newLesson.grab_set()
 
     def quit(self):
-        pass
+        self.__newLesson.quit()
+
+    def warning(self, title, message):
+        messagebox.showwarning(title, message)
