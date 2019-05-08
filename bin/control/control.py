@@ -27,7 +27,7 @@ class Control:
 
     def __openElement(self, e=None):
         lessonTitle = self.__list.getSelectedElement().getTitle()
-        lessonContent = getLesson(self.__list.getSelectedElement())  # Lezione
+        lessonContent = getLesson(self.__list.getSelectedElement())
         LessonView(self.__root, lessonTitle, lessonContent)
 
     def newLesson(self, e=None):

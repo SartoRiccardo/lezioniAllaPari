@@ -8,6 +8,8 @@ customization.xml
 _windows
 __windows
 codestyles
+git.xml
+laf.xml
 debugger.xml
 filetypes.xml
 ide.general.xml
