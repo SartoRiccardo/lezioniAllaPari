@@ -24,22 +24,18 @@ def getLesson(lesson):
 
     directory = LESSONS_DIR + lesson.getID() + ".md"
 
+    lesson_content = ""
     file = open(directory, "r", encoding="utf-8")
+    for line in file:
+        line = line.replace("\n", "")
+        bs = BeautifulSoup(line, features="html.parser")
+        line = str(bs.encode("ascii"))[2:-1]
+        lesson_content += line + "\n"
 
-    string = ""
+    lesson_content = markdown(lesson_content)
 
-    for content in file:
-        content = content.replace("\n", "")
-        bs = BeautifulSoup(content, features="html.parser")
-        content = str(bs.encode("ascii"))[2:-1]
-        string += content+"\n"
-
-    print(string)
-
-    ret = markdown(string)
-    print(ret)
     file.close()
-    return ret
+    return lesson_content
 
 
 def saveLesson(lesson, content):

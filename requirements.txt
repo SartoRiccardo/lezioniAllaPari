@@ -1,4 +1,5 @@
 Markdown==3.1
-tk_html_widgets
 tkcalendar
+tk_html_widgets
 Pillow
+beautifulsoup4
