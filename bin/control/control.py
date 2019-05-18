@@ -16,22 +16,24 @@ class Control:
         self.__login = LoginControl(self.__root)  # Login
         self.__user = self.__login.getLoggedUser()
 
-        self.__visibleElements = getElementsVisibleTo(self.__user)  # Carica lezioni/test da visualizzare
+        self.__view.setUser(self.__user)  # Setta User e lezioni
+        self.__list = self.__view.getObjectList()  # Oggetto Lista
 
-        self.__view.setUser(self.__user, self.__visibleElements)  # Setta User e lezioni
-
-        self.__list = self.__view.getList()  # Oggetto Lista
-        self.__list.getList().bind("<Double-Button-1>", self.__openElement)
+        self.refresh()
 
         self.__root.mainloop()
 
-    def __openElement(self, e=None):
+    def openElement(self, e=None):
         lessonTitle = self.__list.getSelectedElement().getTitle()
         lessonContent = getLesson(self.__list.getSelectedElement())
         LessonView(self.__root, lessonTitle, lessonContent)
 
     def newLesson(self, e=None):
-        NewLessonControl(self.__root, self.__user)
+        NewLessonControl(self, self.__root, self.__user.getUsername(), self.__user.getClass())
+
+    def refresh(self, e=None):
+        self.__visibleElements = getElementsVisibleTo(self.__user)  # Carica lezioni/test da visualizzare
+        self.__view.setList(self.__visibleElements)
 
     def close(self, e=None):
         sys.exit(0)

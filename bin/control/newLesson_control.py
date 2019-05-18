@@ -2,24 +2,16 @@ from datetime import datetime
 from view.newLesson_view import NewLessonView
 from control.io_manager import saveLesson, getLastID
 from objects.lesson import Lesson
-from tkinter import messagebox
 
 
 class NewLessonControl:
+    def __init__(self, control, root, username, classes):
+        self.__control = control
+        self.__root = root
+        self.__username = username
 
-    def __init__(self, root, user):
-        self.__user = user
-        self.__newLesson = NewLessonView(root, user, self)
-        self.__newLesson.focus()
+        self.__newLesson = NewLessonView(root, classes, self)
         self.__newLesson.mainloop()
-
-    def updateAccents(self, text):
-        """
-        Sostituisce le lettere accentate con i caratteri speciali dell'html
-        :param text:
-        :return:
-        """
-        pass
 
     def addNewLesson(self):
         newId = getLastID() + 1
@@ -28,14 +20,19 @@ class NewLessonControl:
         endDate = int(datetime.timestamp(datetime.strptime(str(self.__newLesson.getDateEnd()), "%Y-%m-%d")))
         classes = self.__newLesson.getClassList()
         text = self.__newLesson.getLessonContent()
-        proprietario = self.__user.getUsername()
+        owner = self.__username
 
-        if title != "" and classes != "" and text != "":
-            lessonObject = Lesson(str(newId), title, startDate, endDate, proprietario)
-            for c in classes:
-                lessonObject.addClass(c)
-            saveLesson(lessonObject, text)
+        if title != "":
+            lesson = Lesson(str(newId), title, startDate, endDate, owner)
+
+            if len(classes) > 0:
+                for c in classes:
+                    lesson.addClass(c)
+            else:
+                lesson.addClass("None")
+
+            saveLesson(lesson, text)
+            self.__control.refresh()  # Ricaricare Listbox
             self.__newLesson.quit()
         else:
-            self.__newLesson.warning("Campi incompleti", "Verificare di aver completato tutti i campi necessari.")
-
+            self.__newLesson.warning("Errore", "Inserire un Titolo")

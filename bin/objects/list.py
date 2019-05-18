@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Listbox, Scrollbar, RIGHT, SINGLE, END, Y
 
 
 class List:
@@ -11,14 +11,21 @@ class List:
         self.__list = Listbox(self.__root, selectmode=SINGLE, yscrollcommand=self.__scrollBar.set)
         self.__list.config(width=40)
         self.__list.pack()
-        self.__lessons = [x for x in array]
-        for item in array:
-            self.__list.insert(END, str(item))
+
+        self.__lessons = []
+        self.setList(array)
 
         self.__scrollBar.config(command=self.__list.yview)
 
-    def getList(self):
+    def getObjectList(self):
         return self.__list
+
+    def setList(self, array=[]):
+        self.__deleteAll()
+
+        self.__lessons = [x for x in array]
+        for item in array:
+            self.__list.insert(END, str(item))
 
     def getSelectedElement(self, e=None):
         if self.__list.curselection() is ():
@@ -29,13 +36,5 @@ class List:
     def setSelectedItem(self, i):
         self.__list.activate(i)
 
-    def delete(self, i):
-        if 0 <= i < len(self.__lessons):
-            self.__list.delete(i)
-            self.__lessons.pop(i)
-
-    def add(self, lesson, i=None):
-        if i is None:
-            i = len(self.__lessons)
-        self.__list.insert(i, str(lesson))
-        self.__lessons.insert(i, lesson)
+    def __deleteAll(self):
+        self.__list.delete(0, END)

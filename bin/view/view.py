@@ -20,7 +20,7 @@ class View:
         self.__user = None
         self.__list = None
 
-    def setUser(self, user, lessons):
+    def setUser(self, user):
         """
         Setta utente e crea grafica
         :param user: User
@@ -35,14 +35,18 @@ class View:
         classes = "Classi: " if len(self.__user.getClass()) > 1 else "Classe: "
         for classroom in self.__user.getClass():
             classes += classroom
-            if classroom != self.__user.getClass()[-1]:
+            if classroom != self.__user.getClass()[-1]:  # Non la prima del ciclo, allora ','
                  classes += ", "
         Label(self.__frame, text=classes).pack()
 
-        self.__list = List(self.__frame, lessons)  # Carica lista elementi
+        self.__list = List(self.__frame)
+        self.__list.getObjectList().bind("<Double-Button-1>", self.__control.openElement)
 
         if user.getState() != "S":
             Button(self.__frame, text="Nuova Lezione", width=10, height=1, command=self.__control.newLesson).pack()
 
-    def getList(self):
+    def setList(self, lessons):
+        self.__list.setList(lessons)  # Carica lista elementi
+
+    def getObjectList(self):
         return self.__list
