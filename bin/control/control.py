@@ -2,7 +2,6 @@ from tkinter import Tk, sys
 from control.login_control import LoginControl
 from view.view import View
 from control.io_manager import getLesson, getElementsVisibleTo
-from view.lesson_view import LessonView
 from control.newLesson_control import NewLessonControl
 
 
@@ -16,17 +15,17 @@ class Control:
         self.__login = LoginControl(self.__root)  # Login
         self.__user = self.__login.getLoggedUser()
 
-        self.__view.setUser(self.__user)  # Setta User e lezioni
-        self.__list = self.__view.getObjectList()  # Oggetto Lista
+        self.__view.setView(self.__user)  # Setta User e lezioni
+        self.__list = self.__view.getList()  # Oggetto Lista
 
         self.refresh()
 
         self.__root.mainloop()
 
     def openElement(self, e=None):
-        lessonTitle = self.__list.getSelectedElement().getTitle()
-        lessonContent = getLesson(self.__list.getSelectedElement())
-        LessonView(self.__root, lessonTitle, lessonContent)
+        lesson_content = getLesson(self.__list.getSelectedElement())
+
+        self.__view.setHTML(lesson_content)
 
     def newLesson(self, e=None):
         NewLessonControl(self, self.__root, self.__user.getUsername(), self.__user.getClass())
