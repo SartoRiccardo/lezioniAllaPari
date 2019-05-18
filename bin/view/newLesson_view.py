@@ -1,6 +1,6 @@
 from tkinter import *
-from tkcalendar import DateEntry
 from tkinter import messagebox
+from tkcalendar import DateEntry
 
 
 class NewLessonView:
@@ -12,7 +12,7 @@ class NewLessonView:
         self.__newLesson = Toplevel(self.__root)
         self.__newLesson.title("Nuova lezione")
         self.__newLesson.geometry("1150x500")
-        # self.__newLesson.minsize(width=500, height=350)
+        # self.__newLesson.minsize(width=750, height=500)
         self.__newLesson.resizable(False, False)
         self.__newLesson.grab_set()
 
@@ -58,7 +58,7 @@ class NewLessonView:
         self.__scroll.grid(row=1, column=7, rowspan=10, sticky=N+S)
 
         self.__inputText = Text(self.__newLesson, width=75, yscrollcommand=self.__scroll.set)
-        self.__inputText.grid(row=1, column=6, rowspan=10)
+        self.__inputText.grid(row=1, column=6, rowspan=10, sticky=SE)
         self.__scroll.config(command=self.__inputText.yview)
 
         # Button Save

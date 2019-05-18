@@ -11,10 +11,9 @@ class LessonView:
         self.__view = Toplevel(self.__root)
         self.__view.title(self.__title)
         self.__view.geometry("700x600")
-        self.__view.minsize(width=500, height=500)
+        self.__view.minsize(width=400, height=400)
 
         self.__html = HTMLLabel(self.__view, html=self.__content)
-        self.__html.fit_height()
         self.__html.pack(fill=BOTH, expand=True, padx=20, pady=10)
 
         self.__view.mainloop()
