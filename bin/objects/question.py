@@ -1,5 +1,6 @@
 from abc import abstractmethod, ABC
 import random
+import copy
 
 
 class Question(ABC):
@@ -22,10 +23,9 @@ class ClosedQuestion(Question):
         self._pointEvaluator = pointEvaluator
 
         self._answers = answers
+        self._shuffledAnswers = copy.copy(self._answers)
         if self._shuffle:
-            self._shuffledAnswers = random.shuffle(self._answers)
-        else:
-            self._shuffledAnswers = self._answers
+            random.shuffle(self._shuffledAnswers)
 
     @abstractmethod
     def getScore(self):
@@ -44,10 +44,10 @@ class SingleAnswerQuestion(ClosedQuestion):
     def __init__(self, text, shuffle: bool, pointEvaluator, answers, correct):
         ClosedQuestion.__init__(self, text, shuffle, pointEvaluator, answers)
         self.__correct = correct
-        self.__selectedAnswer = None
+        self.__selectedAnswer = -1
 
     def getScore(self):
-        if self.__selectedAnswer is None:
+        if self.__selectedAnswer == -1:
             return self._pointEvaluator.unanswered()
         elif self.__selectedAnswer == self.__correct:
             return self._pointEvaluator.neutralScore() + self._pointEvaluator.scorePerCorrect()
@@ -55,8 +55,19 @@ class SingleAnswerQuestion(ClosedQuestion):
             return self._pointEvaluator.neutralScore() - self._pointEvaluator.scorePerIncorrect()
 
     def selectAnswer(self, i):
-        correctIndex = self._answers.index(self._shuffledAnswers[i])
-        self.__selectedAnswer = self._answers[correctIndex]
+        self.__selectedAnswer = self._answers.index(self._shuffledAnswers[i])
+
+    def __str__(self):
+        ret = self._text + "\n"
+        shuffledIndex = self._shuffledAnswers.index(self._answers[self.__selectedAnswer]) \
+                            if self.__selectedAnswer >= 0 else -1
+        for i in range(len(self._shuffledAnswers)):
+
+            if i == shuffledIndex:
+                ret += f">>> {self._shuffledAnswers[i]}\n"
+            else:
+                ret += f">   {self._shuffledAnswers[i]}\n"
+        return ret[:-1]
 
 
 class MultipleAnswerQuestion(ClosedQuestion):
@@ -71,10 +82,10 @@ class MultipleAnswerQuestion(ClosedQuestion):
         else:
             score = self._pointEvaluator.neutralScore()
             for answer in self.__selectedAnswers:
-                if answer in self.__selectedAnswers:
+                if answer in self.__correct:
                     score += self._pointEvaluator.scorePerCorrect()
                 else:
-                    score += self._pointEvaluator.scorePerIncorrect()
+                    score -= self._pointEvaluator.scorePerIncorrect()
             return score
 
     def selectAnswer(self, i):
@@ -83,6 +94,16 @@ class MultipleAnswerQuestion(ClosedQuestion):
             self.__selectedAnswers.remove(correctIndex)
         else:
             self.__selectedAnswers.append(correctIndex)
+
+    def __str__(self):
+        ret = self._text + "\n"
+        shuffledIndexes = [self._shuffledAnswers.index(self._answers[i]) for i in self.__selectedAnswers]
+        for i in range(len(self._shuffledAnswers)):
+            if i in shuffledIndexes:
+                ret += f"+ {self._shuffledAnswers[i]}\n"
+            else:
+                ret += f"- {self._shuffledAnswers[i]}\n"
+        return ret[:-1]
 
 
 class OpenQuestion:

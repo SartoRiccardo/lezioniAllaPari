@@ -1,4 +1,4 @@
-from random import shuffle
+import random
 
 
 class Test:
@@ -15,7 +15,7 @@ class Test:
             self.__questions = []
         else:
             self.__questions = questions
-        self.__order = [n for n in range(len(self.__questions))]
+        self.__order = None
         self.shuffleQuestions()
 
     def evaluate(self):
@@ -40,7 +40,8 @@ class Test:
 
     def shuffleQuestions(self):
         if self.__shuffle:
-            self.__order = shuffle(self.__order)
+            self.__order = [i for i in range(len(self.__questions))]
+            random.shuffle(self.__order)
 
     # Get & Set
     def getName(self):
@@ -59,11 +60,42 @@ class Test:
             self.shuffleQuestions()
 
     def popQuestion(self, i):
-        if 0 >= i > len(self.__questions):
+        if 0 <= i < len(self.__questions):
             self.__questions.pop(i)
             self.shuffleQuestions()
 
     def getQuestion(self, i):
-        if 0 >= i > len(self.__questions):
+        if 0 <= i < len(self.__questions):
             return self.__questions[i]
 
+    def __str__(self):
+        ret = self.__name + "\n"
+        for i in self.__order:
+            ret += str(self.__questions[i]) + "\n"
+        return ret[:-1]
+
+
+if __name__ == '__main__':
+    from question import SingleAnswerQuestion, MultipleAnswerQuestion
+    from score import Score
+
+    answers = ["8", "16", "256", "1"]
+    q0 = MultipleAnswerQuestion("Quali numeri sono >10?", False, Score(scorePerCorrect=1.0, scorePerIncorrect=-1.0),
+                               answers, [1, 2])
+    q0.selectAnswer(1)
+    q0.selectAnswer(2)
+
+    answers = ["10", "11", "12", "13"]
+    q1 = SingleAnswerQuestion("Quanto vale 5+5?", False, Score(scorePerCorrect=1.0, scorePerIncorrect=-1.0), answers, 0)
+    q1.selectAnswer(0)
+
+    t = Test("Numeri")
+    print(t, "\n")
+
+    t.addQuestion(q0)
+    print(t, "\n")
+
+    t.addQuestion(q1)
+    print(t, "\n")
+
+    print(t.getQuestion(1), "\n")
