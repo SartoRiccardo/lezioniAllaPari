@@ -1,28 +1,53 @@
 {
   "title":"title",
   "date":"date",
-  "duration":"minutes",
-  "questions":{
-    "question1":{
-      "1":"answare1",
-      "2":"answare2"
+  "duration":5000,
+  "questions": [
+    {
+      "type": "multiple",
+      "text": "If this and that, what's the volume of the sun?",
+      "answers": ["answer1", "answer2", "answer3", "answer4"],
+      "shuffle": true,
+      "correct_answers": [0, 1]
     },
-    "question2":{
-      "1":"answare1",
-      "2":"answare2"
+    {
+      "type": "single",
+      "text": "SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP",
+      "answers": ["answer1", "answer2", "answer3", "answer4"],
+      "shuffle": true,
+      "correct_answer": 0
     },
-    "question3":{
-      "1":"answare1",
-      "2":"answare2"
+    {
+      "type": "entry",
+      "text": "5+3= <entry>",
+      "evaluation": [
+        {
+          "correct_answers": ["8"],
+          "ignore_case": true,
+          "must_review_teacher": true
+        }
+      ]
     },
-    "question4":{
-      "1":"answare1",
-      "2":"answare2"
-    },
-    "question5":{
-      "1":"answare1",
-      "2":"answare2"
-    },
-    "question6":"answer"
-  }
+    {
+      "type": "entry",
+      "text": "The <entry> in the <entry> should do it <entry> times",
+      "evaluation": [
+        {
+          "correct_answers": ["correct", "also correct"],
+          "ignore_case": true,
+          "must_review_teacher": true
+        },
+        {
+          "correct_answers": ["correct"],
+          "ignore_case": true,
+          "must_review_teacher": true
+        },
+        {
+          "correct_answers": ["5"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        }
+      ]
+    }
+  ]
 }

@@ -1,0 +1,64 @@
+{
+  "title": "Quanto Conosci SARTORI?",
+  "date": "date",
+  "duration": 300,
+  "questions": [
+    {
+      "type": "multiple",
+      "text": "Quali materie odia SARTORI?",
+      "answers": ["Italiano", "Informatica", "Chimica", "Sistemi e Reti"],
+      "shuffle": true,
+      "correct_answers": [0, 3]
+    },
+    {
+      "type": "single",
+      "text": "Qual è la saga preferita di SARTORI?",
+      "answers": ["The Legend Of Zelda", "Mega Man", "Pokémon", "Clock Tower"],
+      "shuffle": true,
+      "correct_answer": 1
+    },
+    {
+      "type": "multiple",
+      "text": "SARTORI ha",
+      "answers": ["un gatto", "un cane", "una colonia di formiche", "un criceto"],
+      "shuffle": false,
+      "correct_answers": [0, 3]
+    },
+    {
+      "type": "entry",
+      "text": "In ordine, gli Yu-Gi-Oh! preferiti da SARTORI sono <entry> <entry> <entry> <entry> <entry> <entry>",
+      "evaluation": [
+        {
+          "correct_answers": ["zexal"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        },
+        {
+          "correct_answers": ["gx"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        },
+        {
+          "correct_answers": ["vrains"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        },
+        {
+          "correct_answers": ["5ds", "5d's"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        },
+        {
+          "correct_answers": ["duel monsters", "dm"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        },
+        {
+          "correct_answers": ["arc-v", "arcv"],
+          "ignore_case": true,
+          "must_review_teacher": false
+        }
+      ]
+    }
+  ]
+}
