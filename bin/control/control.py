@@ -8,7 +8,6 @@ from control.newLesson_control import NewLessonControl
 class Control:
     def __init__(self):
         self.__root = Tk()
-        # self.__root.protocol("WM_DELETE_WINDOW", self.close)  # Controllo su chiusura della finestra
 
         self.__view = View(self.__root, self)  # GUI root
 

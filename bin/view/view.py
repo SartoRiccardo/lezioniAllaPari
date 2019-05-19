@@ -9,7 +9,6 @@ class View:
         self.__control = control
 
         self.__root.title("Lezioni alla Pari")
-        self.__root.grab_set()  # Blocca root
         self.__root.withdraw()  # Nascondi finestra fino al login
         self.__root.geometry("1000x600")
         self.__root.minsize(800, 500)

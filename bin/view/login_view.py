@@ -9,6 +9,7 @@ class LoginView:
         self.__control = control
 
         self.__login = Toplevel(self.__root)
+        self.__login.grab_set()  # Blocca root
         self.__login.title("Login")
         self.__login.geometry("300x250")
         self.__login.resizable(width="False", height="False")
@@ -54,9 +55,9 @@ class LoginView:
         self.__login.mainloop()
 
     def quit(self):
-        self.__root.grab_release()  # Sblocca root
         self.__root.deiconify()  # Mostra root
 
+        self.__login.grab_release()  # Sblocca root
         self.__login.quit()  # Tornare in esecuzione root
         self.__login.destroy()  # Chiudi finestra
 
