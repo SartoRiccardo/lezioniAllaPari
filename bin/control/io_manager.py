@@ -86,20 +86,28 @@ def getLastID():
     Trova il più grande ID inserito (l'ultimo)
     :return: int
     """
-    INDEX = "file/index.csv"
-    last_ID = 0
+    LAST_ID = "config/last_id.txt"
 
-    file = open(INDEX, "r")
+    file = open(LAST_ID, "r")
 
-    file.readline()  # Rimuove prima riga
-
-    for line in file:
-        line = line.split(";")
-        if int(line[0]) > last_ID:
-            last_ID = int(line[0])
+    last_id = file.read()
 
     file.close()
-    return last_ID
+    return int(last_id)
+
+
+def setLastID(last_id):
+    """
+    Salva ultimo ID
+    :return: None
+    """
+    LAST_ID = "config/last_id.txt"
+
+    file = open(LAST_ID, "w")
+
+    file.write(str(last_id))
+
+    file.close()
 
 
 def getElementsVisibleTo(user):

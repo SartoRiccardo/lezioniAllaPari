@@ -3,6 +3,7 @@ from tk_html_widgets import HTMLLabel
 
 
 class LessonView:
+    """ Deprecated """
     def __init__(self, root, title, content):
         self.__root = root
         self.__title = title

@@ -1,6 +1,6 @@
 from datetime import datetime
 from view.newLesson_view import NewLessonView
-from control.io_manager import saveLesson, getLastID
+from control.io_manager import saveLesson, getLastID, setLastID
 from objects.lesson import Lesson
 
 
@@ -32,6 +32,7 @@ class NewLessonControl:
                 lesson.addClass("None")
 
             saveLesson(lesson, text)
+            setLastID(newId)
             self.__control.refresh()  # Ricaricare Listbox
             self.__newLesson.quit()
         else:
