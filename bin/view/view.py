@@ -19,7 +19,7 @@ class View:
         self.__frameInfo.pack(side=TOP, fill=X, padx=5, pady=10)
 
         self.__frameLesson = Frame(self.__root)
-        self.__frameLesson.pack(fill=BOTH, expand=True, padx=5, pady=10)
+        self.__frameLesson.pack(side=BOTTOM, fill=BOTH, padx=5, pady=10, expand=True)
 
         self.__user = None
         self.__list = None
