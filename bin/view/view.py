@@ -9,7 +9,6 @@ class View:
         self.__control = control
 
         self.__root.title("Lezioni alla Pari")
-        self.__root.grab_set()  # Blocca root
         self.__root.withdraw()  # Nascondi finestra fino al login
         self.__root.geometry("1000x600")
         self.__root.minsize(800, 500)
@@ -19,7 +18,7 @@ class View:
         self.__frameInfo.pack(side=TOP, fill=X, padx=5, pady=10)
 
         self.__frameLesson = Frame(self.__root)
-        self.__frameLesson.pack(fill=BOTH, expand=True, padx=5, pady=10)
+        self.__frameLesson.pack(side=BOTTOM, fill=BOTH, padx=5, pady=10, expand=True)
 
         self.__user = None
         self.__list = None

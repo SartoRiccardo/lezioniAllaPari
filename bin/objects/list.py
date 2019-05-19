@@ -1,14 +1,15 @@
-# from tkinter import Listbox, Scrollbar, RIGHT, SINGLE, END, Y
-from tkinter import *
+from tkinter import Frame, Listbox, Scrollbar, SINGLE, BOTH, LEFT, RIGHT, W, Y, END
 
 
 class List:
     def __init__(self, root, array=[]):
         self.__root = root
 
-        self.__scrollBar = Scrollbar(self.__root)
+        self.__frame = Frame(self.__root)
 
-        self.__list = Listbox(self.__root, selectmode=SINGLE, yscrollcommand=self.__scrollBar.set)
+        self.__scrollBar = Scrollbar(self.__frame)
+
+        self.__list = Listbox(self.__frame, selectmode=SINGLE, width=10, yscrollcommand=self.__scrollBar.set)
         self.__list.config(width=40)
         self.__list.pack(side=LEFT, anchor=W, fill=BOTH, expand=True)
 
@@ -17,6 +18,8 @@ class List:
 
         self.__scrollBar.config(command=self.__list.yview)
         self.__scrollBar.pack(side=RIGHT, fill=Y)
+
+        self.__frame.pack(side=LEFT, anchor=W, fill=BOTH, expand=True)
 
     def getObjectList(self):
         return self.__list
