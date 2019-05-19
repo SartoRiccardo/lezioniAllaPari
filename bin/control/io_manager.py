@@ -1,6 +1,5 @@
 from datetime import datetime
 from markdown import markdown
-from bs4 import BeautifulSoup
 from os import remove
 import objects.user
 import objects.lesson
@@ -24,15 +23,9 @@ def getLesson(lesson):
 
     directory = LESSONS_DIR + lesson.getID() + ".md"
 
-    lesson_content = ""
     file = open(directory, "r", encoding="utf-8")
-    for line in file:
-        line = line.replace("\n", "")
-        bs = BeautifulSoup(line, features="html.parser")
-        line = str(bs.encode("ascii"))[2:-1]
-        lesson_content += line + "\n"
 
-    lesson_content = markdown(lesson_content)
+    lesson_content = markdown(file.read())
 
     file.close()
     return lesson_content
@@ -49,7 +42,7 @@ def saveLesson(lesson, content):
     INDEX_DIR = "file/index.csv"
     INDEX_BACKUP_DIR = INDEX_DIR.replace("index.csv", "index_backup.csv")
 
-    out = open(LESSONS_DIR + lesson.getID() + ".md", "w")
+    out = open(LESSONS_DIR + lesson.getID() + ".md", "w", encoding="utf-8")
     out.write(content)
     out.close()
 
