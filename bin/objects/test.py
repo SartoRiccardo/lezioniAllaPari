@@ -1,20 +1,19 @@
+from objects.element import Element
 import random
 
 
-class Test:
-    def __init__(self, name, shuffle=True, questions=None):
+class Test(Element):
+    def __init__(self, title, start, end, owner, shuffle=True, questions=[]):
         """
         Una classe che raprresenta un test o una verifica
-        :param name: Il nome del test
-        :param shuffle: Un flag che determina se l'ordine delle domande è randomizzato
+        :param title: Il nome del test
+        :param shuffle: Un flag che determina se l'ordine delle domande deve essere random
         :param questions:
         """
-        self.__name = name
+        super(Test, self).__init__(id, title, start, end, owner)
+
         self.__shuffle = shuffle
-        if questions is None:
-            self.__questions = []
-        else:
-            self.__questions = questions
+        self.__questions = questions
         self.__order = None
         self.shuffleQuestions()
 
@@ -44,12 +43,6 @@ class Test:
             random.shuffle(self.__order)
 
     # Get & Set
-    def getName(self):
-        return self.__name
-
-    def setName(self, name):
-        self.__name = name
-
     def addQuestion(self, q):
         self.__questions.append(q)
         self.shuffleQuestions()
@@ -69,10 +62,11 @@ class Test:
             return self.__questions[i]
 
     def __str__(self):
-        ret = self.__name + "\n"
+        ret = super().getTitle() + "\n"
         for i in self.__order:
             ret += str(self.__questions[i]) + "\n"
         return ret[:-1]
+        # return "{} - Scadenza: {}".format(super().getTitle(), super().getEnd())
 
 
 if __name__ == '__main__':
@@ -89,7 +83,7 @@ if __name__ == '__main__':
     q1 = SingleAnswerQuestion("Quanto vale 5+5?", False, Score(scorePerCorrect=1.0, scorePerIncorrect=-1.0), answers, 0)
     q1.selectAnswer(0)
 
-    t = Test("Numeri")
+    t = Test("Numeri", 0, 0, "s")
     print(t, "\n")
 
     t.addQuestion(q0)

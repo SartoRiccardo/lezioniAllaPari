@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
+from datetime import datetime
 
 
 class Element(ABC):
     def __init__(self, id, title, start, end, owner, *classrooms):
         self.__id = id
         self.__title = title
-        self.__start = start
-        self.__end = end
+        self.__start = int(start)
+        self.__end = int(end)
         self.__owner = owner
 
         if len(classrooms) == 1 and isinstance(classrooms[0], list):
@@ -51,6 +52,5 @@ class Element(ABC):
     def setOwner(self, owner):
         self.__owner = owner
 
-    @abstractmethod
     def __str__(self):
-        pass
+        return "{} - Scadenza: {}".format(self.__title, datetime.fromtimestamp(self.__end))

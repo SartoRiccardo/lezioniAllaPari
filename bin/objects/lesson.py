@@ -1,5 +1,5 @@
 from objects.element import Element
-from copy import deepcopy
+
 
 class Lesson(Element):
     def __init__(self, id, title, start, end, owner, *classrooms):
@@ -7,6 +7,3 @@ class Lesson(Element):
 
         for c in classrooms:
             self.addClass(c)
-
-    def __str__(self):
-        return "{} - Scadenza: {}".format(super().getTitle(), super().getEnd())

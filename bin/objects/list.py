@@ -9,7 +9,7 @@ class List:
 
         self.__scrollBar = Scrollbar(self.__frame)
 
-        self.__list = Listbox(self.__frame, selectmode=SINGLE, width=10, yscrollcommand=self.__scrollBar.set)
+        self.__list = Listbox(self.__frame, font=18, selectmode=SINGLE, width=10, yscrollcommand=self.__scrollBar.set)
         self.__list.config(width=40)
         self.__list.pack(side=LEFT, anchor=W, fill=BOTH, expand=True)
 
