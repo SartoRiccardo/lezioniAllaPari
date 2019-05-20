@@ -32,7 +32,7 @@ class NewLessonControl:
                 lesson.addClass("None")
 
             saveLesson(lesson, text)
-            setLastID(newId)
+            setLastID(newId)  # Salva nuovo Ultimo ID
             self.__control.refresh()  # Ricaricare Listbox
             self.__newLesson.quit()
         else:

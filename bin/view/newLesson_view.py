@@ -12,63 +12,103 @@ class NewLessonView:
         self.__newLesson = Toplevel(self.__root)
         self.__newLesson.title("Nuova lezione")
         self.__newLesson.geometry("1150x500")
-        # self.__newLesson.minsize(width=750, height=500)
-        self.__newLesson.resizable(False, False)
+        self.__newLesson.minsize(width=1000, height=500)
+        # self.__newLesson.resizable(False, False)
         self.__newLesson.grab_set()
 
-        Label(self.__newLesson, text="\nNuova Lezione\n").grid(row=0, column=0, columnspan=4)
+        self.__fInfo = Frame(self.__newLesson)  # Frame Info
 
-        Label(self.__newLesson, text="Titolo").grid(row=1, column=1, columnspan=1)
-        self.__title = Entry(self.__newLesson, justify="center")
+        self.__fTitle = Frame(self.__fInfo)  # Frame Titolo
+        Label(self.__fTitle, text="\nNuova Lezione\n").pack(side=TOP, anchor=N)
+
+        # Titolo
+        Label(self.__fTitle, text="Titolo").pack(side=LEFT, anchor=N)
+        self.__title = Entry(self.__fTitle, justify="center")
         self.__title.focus()
-        self.__title.grid(row=1, column=2, columnspan=1)
+        self.__title.pack(side=LEFT, anchor=N)
+
+        self.__fTitle.pack(side=TOP, anchor=N, padx=10, pady=20)  # Fine Frame Titolo
+
+        # Data
+        self.__fData = Frame(self.__fInfo)  # Frame Data
 
         # Data Inizio
-        Label(self.__newLesson, text="Data d'Inizio").grid(row=2, column=0, columnspan=2)
+        self.__fDataStart = Frame(self.__fData)  # Frame Data Start
+        Label(self.__fDataStart, text="Data d'Inizio").pack(side=TOP, anchor=N)
 
-        self.__calcStart = DateEntry(self.__newLesson, width=20,
-                        firstweekday="monday", showweeknumbers=False, showothermonthdays=False, locale="it_it",
-                        selectmode="None", background='darkblue', foreground='white', borderwidth=2,
-                        state="readonly")
-        self.__calcStart.grid(row=3, column=1, columnspan=1)
+        self.__calcStart = DateEntry(self.__fDataStart, width=20,
+                                     firstweekday="monday", showweeknumbers=False, showothermonthdays=False,
+                                     locale="it_it",
+                                     selectmode="None", background='darkblue', foreground='white', borderwidth=2,
+                                     state="readonly")
+        self.__calcStart.pack(side=TOP, anchor=N)
+        self.__fDataStart.pack(side=LEFT, anchor=N, padx=20)  # Fine Frame Data Start
 
         # Data Fine
-        Label(self.__newLesson, text="Data di Fine").grid(row=2, column=2, columnspan=2)
+        self.__fDataEnd = Frame(self.__fData)  # Frame Data End
+        Label(self.__fDataEnd, text="Data di Fine").pack(side=TOP, anchor=N)
 
-        self.__calcEnd = DateEntry(self.__newLesson, width=20,
-                         firstweekday="monday", showweeknumbers=False, showothermonthdays=False, locale="it_it",
-                         selectmode="None", background='darkblue', foreground='white', borderwidth=2,
-                         state="readonly")
-        self.__calcEnd.grid(row=3, column=3, columnspan=1)
+        self.__calcEnd = DateEntry(self.__fDataEnd, width=20,
+                                   firstweekday="monday", showweeknumbers=False, showothermonthdays=False,
+                                   locale="it_it",
+                                   selectmode="None", background='darkblue', foreground='white', borderwidth=2,
+                                   state="readonly")
+        self.__calcEnd.pack(side=TOP, anchor=N)
+        self.__fDataEnd.pack(side=LEFT, anchor=N, padx=20)  # Fine Frame Data End
+
+        self.__fData.pack(side=TOP, anchor=N, padx=10, pady=20)  # Fine Frame Data
 
         # Classi
-        self.__classiSel = []       # variabili di stato dei checkbox (1 se selezionato, altrimenti 0)
-        Label(self.__newLesson, text="Classi").grid(row=6, column=0, columnspan=4)
+        self.__fClass = Frame(self.__fInfo, relief=FLAT)  # Frame Class
 
-        for lesson in self.__classes:
-            index = self.__classes.index(lesson)
-            self.__classiSel.append(IntVar())
-            row = int(index / 5)
-            column = index % 5
-            Checkbutton(self.__newLesson, text=lesson, variable=self.__classiSel[index]).grid(row=7 + row,
-                                                                                              column=column)
+        self.__classSel = []  # variabili di stato dei checkbox (1 se selezionato, altrimenti 0)
+        Label(self.__fClass, text="Classi").pack(side=TOP, anchor=N)
+
+        n = len(self.__classes)
+        frames = []
+        for i in range(int(n / 5) + (1 if n % 5 != 0 else 0)):
+            frame = Frame(self.__fClass)
+            frames.append(frame)
+            frames[i].pack(side=TOP, anchor=NW, padx=2, pady=2)
+
+        j, k = 0, 0
+        for i in range(n):
+            self.__classSel.append(IntVar())
+            checkbtn = Checkbutton(frames[j], text=self.__classes[i], variable=self.__classSel[i])
+            checkbtn.pack(side=LEFT, anchor=N, padx=10)
+            if k < 4:
+                k += 1
+            else:
+                j += 1
+                k = 0
+
+        self.__fClass.pack(side=TOP, anchor=N, padx=10, pady=20)  # Fine Frame Class
 
         # TextArea
-        self.__scroll = Scrollbar(self.__newLesson)
-        self.__scroll.grid(row=1, column=7, rowspan=10, sticky=N+S)
+        self.__fText = Frame(self.__newLesson)  # Frame TextArea
 
-        self.__inputText = Text(self.__newLesson, width=75, yscrollcommand=self.__scroll.set)
-        self.__inputText.grid(row=1, column=6, rowspan=10, sticky=SE)
+        self.__scroll = Scrollbar(self.__fText)
+        self.__scroll.pack(side=RIGHT, anchor=SE, fill=Y)
+
+        self.__inputText = Text(self.__fText, width=75, yscrollcommand=self.__scroll.set)
+        self.__inputText.pack(side=LEFT, anchor=N, fill=BOTH, expand=True)
         self.__scroll.config(command=self.__inputText.yview)
 
+        # Button
+        self.__fButton = Frame(self.__fInfo)  # Frame Button
+
         # Button Save
-        self.__create = Button(self.__newLesson, text="Crea", width=10, height=1,
-                               command=self.__control.addNewLesson)
-        self.__create.grid(row=7 + len(self.__classiSel), column=0, columnspan=4)
+        self.__create = Button(self.__fButton, text="Crea", width=10, height=1, command=self.__control.addNewLesson)
+        self.__create.pack(side=LEFT, padx=10, pady=20)
 
         # Button Cancel
-        self.__create = Button(self.__newLesson, text="Annulla", width=10, height=1, command=self.quit)
-        self.__create.grid(row=7 + len(self.__classiSel), column=2, columnspan=4)
+        self.__create = Button(self.__fButton, text="Annulla", width=10, height=1, command=self.quit)
+        self.__create.pack(side=LEFT, padx=10, pady=20)
+
+        self.__fButton.pack(side=BOTTOM)  # Fine Frame Button
+
+        self.__fInfo.pack(side=LEFT, anchor=N, fill=Y, padx=10, pady=20)  # Fine Frame Info
+        self.__fText.pack(side=LEFT, anchor=N, fill=BOTH, expand=True, padx=10, pady=10)  # Fine Frame Text
 
     def getTitle(self):
         return self.__title.get()
@@ -93,8 +133,8 @@ class NewLessonView:
         """
         classList = self.__classes
         r = []
-        for c in range(len(self.__classiSel)):
-            if self.__classiSel[c].get() == 1:
+        for c in range(len(self.__classSel)):
+            if self.__classSel[c].get() == 1:
                 r.append(classList[c])
         return r
 
