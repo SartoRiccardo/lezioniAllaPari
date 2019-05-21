@@ -1,6 +1,8 @@
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
 from tkcalendar import DateEntry
+from datetime import timedelta, datetime
 
 
 class NewLessonView:
@@ -11,9 +13,7 @@ class NewLessonView:
 
         self.__newLesson = Toplevel(self.__root)
         self.__newLesson.title("Nuova lezione")
-        self.__newLesson.geometry("1150x500")
-        self.__newLesson.minsize(width=1000, height=500)
-        # self.__newLesson.resizable(False, False)
+        self.__newLesson.minsize(width=800, height=450)
         self.__newLesson.grab_set()
 
         self.__fInfo = Frame(self.__newLesson)  # Frame Info
@@ -42,18 +42,37 @@ class NewLessonView:
                                      selectmode="None", background='darkblue', foreground='white', borderwidth=2,
                                      state="readonly")
         self.__calcStart.pack(side=TOP, anchor=N)
+
+        self.__hourStart = ttk.Combobox(self.__fDataStart, value=self.__getHours(), width=7, state='readonly')
+        self.__hourStart.current(8)
+        self.__hourStart.pack(side=LEFT, anchor=N, pady=10, padx=2)
+
+        self.__minuteStart = ttk.Combobox(self.__fDataStart, value=self.__getMinutes(), width=7, state='readonly')
+        self.__minuteStart.current(0)
+        self.__minuteStart.pack(side=LEFT, anchor=N, pady=10, padx=2)
+
         self.__fDataStart.pack(side=LEFT, anchor=N, padx=20)  # Fine Frame Data Start
 
         # Data Fine
         self.__fDataEnd = Frame(self.__fData)  # Frame Data End
         Label(self.__fDataEnd, text="Data di Fine").pack(side=TOP, anchor=N)
 
-        self.__calcEnd = DateEntry(self.__fDataEnd, width=20,
+        date = datetime.today() + timedelta(days=7)
+        self.__calcEnd = DateEntry(self.__fDataEnd, day=date.day, width=20,
                                    firstweekday="monday", showweeknumbers=False, showothermonthdays=False,
                                    locale="it_it",
                                    selectmode="None", background='darkblue', foreground='white', borderwidth=2,
                                    state="readonly")
         self.__calcEnd.pack(side=TOP, anchor=N)
+
+        self.__hourEnd = ttk.Combobox(self.__fDataEnd, value=self.__getHours(), width=7, state='readonly')
+        self.__hourEnd.current(14)
+        self.__hourEnd.pack(side=LEFT, anchor=N, pady=10, padx=2)
+
+        self.__minuteEnd = ttk.Combobox(self.__fDataEnd, value=self.__getMinutes(), width=7, state='readonly')
+        self.__minuteEnd.current(0)
+        self.__minuteEnd.pack(side=LEFT, anchor=N, pady=10, padx=2)
+
         self.__fDataEnd.pack(side=LEFT, anchor=N, padx=20)  # Fine Frame Data End
 
         self.__fData.pack(side=TOP, anchor=N, padx=10, pady=20)  # Fine Frame Data
@@ -90,7 +109,7 @@ class NewLessonView:
         self.__scroll = Scrollbar(self.__fText)
         self.__scroll.pack(side=RIGHT, anchor=SE, fill=Y)
 
-        self.__inputText = Text(self.__fText, width=75, yscrollcommand=self.__scroll.set)
+        self.__inputText = Text(self.__fText, font=12, yscrollcommand=self.__scroll.set)
         self.__inputText.pack(side=LEFT, anchor=N, fill=BOTH, expand=True)
         self.__scroll.config(command=self.__inputText.yview)
 
@@ -110,14 +129,26 @@ class NewLessonView:
         self.__fInfo.pack(side=LEFT, anchor=N, fill=Y, padx=10, pady=20)  # Fine Frame Info
         self.__fText.pack(side=LEFT, anchor=N, fill=BOTH, expand=True, padx=10, pady=10)  # Fine Frame Text
 
+    def __getHours(self):
+        array = []
+        for i in range(0, 24):
+            array.append(str(i))
+        return array
+
+    def __getMinutes(self):
+        array = []
+        for i in range(0, 60):
+            array.append(str(i))
+        return array
+
     def getTitle(self):
         return self.__title.get()
 
     def getDateStart(self):
-        return self.__calcStart.get_date()
+        return str(self.__calcStart.get_date()) + " " + str(self.__hourStart.get()) + ":" + str(self.__minuteStart.get())
 
     def getDateEnd(self):
-        return self.__calcEnd.get_date()
+        return str(self.__calcEnd.get_date()) + " " + str(self.__hourEnd.get()) + ":" + str(self.__minuteEnd.get())
 
     def getLessonContent(self):
         """

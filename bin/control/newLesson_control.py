@@ -16,8 +16,8 @@ class NewLessonControl:
     def addNewLesson(self):
         newId = getLastID() + 1
         title = self.__newLesson.getTitle()
-        startDate = int(datetime.timestamp(datetime.strptime(str(self.__newLesson.getDateStart()), "%Y-%m-%d")))
-        endDate = int(datetime.timestamp(datetime.strptime(str(self.__newLesson.getDateEnd()), "%Y-%m-%d")))
+        startDate = int(datetime.timestamp(datetime.strptime(self.__newLesson.getDateStart(), "%Y-%m-%d %H:%M")))
+        endDate = int(datetime.timestamp(datetime.strptime(self.__newLesson.getDateEnd(), "%Y-%m-%d %H:%M")))
         classes = self.__newLesson.getClassList()
         text = self.__newLesson.getLessonContent()
         owner = self.__username
