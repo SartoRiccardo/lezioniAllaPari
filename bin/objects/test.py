@@ -1,20 +1,22 @@
-from objects.element import Element
 import random
 
 
-class Test(Element):
-    def __init__(self, title, start, end, owner, shuffle=True, questions=[]):
+class Test:
+    def __init__(self, name, duration, shuffle=True, questions=None):
         """
         Una classe che raprresenta un test o una verifica
-        :param title: Il nome del test
-        :param shuffle: Un flag che determina se l'ordine delle domande deve essere random
+        :param name: Il nome del test
+        :param shuffle: Un flag che determina se l'ordine delle domande è randomizzato
         :param questions:
         """
-        super(Test, self).__init__(id, title, start, end, owner)
-
+        self.__name = name
+        self.__duration = duration
         self.__shuffle = shuffle
-        self.__questions = questions
-        self.__order = None
+        if questions is None:
+            self.__questions = []
+        else:
+            self.__questions = questions
+        self.__order = []
         self.shuffleQuestions()
 
     def evaluate(self):
@@ -38,11 +40,23 @@ class Test(Element):
         return ret
 
     def shuffleQuestions(self):
+        self.__order = [i for i in range(len(self.__questions))]
         if self.__shuffle:
-            self.__order = [i for i in range(len(self.__questions))]
             random.shuffle(self.__order)
 
     # Get & Set
+    def getName(self):
+        return self.__name
+
+    def setName(self, name):
+        self.__name = name
+
+    def getDuration(self):
+        return self.__duration
+
+    def setDuration(self, duration):
+        self.__duration = duration
+
     def addQuestion(self, q):
         self.__questions.append(q)
         self.shuffleQuestions()
@@ -62,11 +76,10 @@ class Test(Element):
             return self.__questions[i]
 
     def __str__(self):
-        ret = super().getTitle() + "\n"
+        ret = self.__name + "\n"
         for i in self.__order:
             ret += str(self.__questions[i]) + "\n"
         return ret[:-1]
-        # return "{} - Scadenza: {}".format(super().getTitle(), super().getEnd())
 
 
 if __name__ == '__main__':
@@ -83,7 +96,7 @@ if __name__ == '__main__':
     q1 = SingleAnswerQuestion("Quanto vale 5+5?", False, Score(scorePerCorrect=1.0, scorePerIncorrect=-1.0), answers, 0)
     q1.selectAnswer(0)
 
-    t = Test("Numeri", 0, 0, "s")
+    t = Test("Numeri")
     print(t, "\n")
 
     t.addQuestion(q0)

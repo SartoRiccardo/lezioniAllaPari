@@ -4,21 +4,8 @@ import copy
 
 
 class Question(ABC):
-    def __init__(self, text):
-        self._text = text
-
-    @abstractmethod
-    def getScore(self):
-        """
-        Ritorna il punteggio ottenuto nella domanda
-        :return: il punteggio: float
-        """
-        pass
-
-
-class ClosedQuestion(Question):
     def __init__(self, text, shuffle: bool, pointEvaluator, answers):
-        Question.__init__(self, text)
+        self._text = text
         self._shuffle = shuffle
         self._pointEvaluator = pointEvaluator
 
@@ -29,6 +16,10 @@ class ClosedQuestion(Question):
 
     @abstractmethod
     def getScore(self):
+        """
+        Ritorna il punteggio ottenuto nella domanda
+        :return: il punteggio: float
+        """
         pass
 
     @abstractmethod
@@ -40,9 +31,9 @@ class ClosedQuestion(Question):
         pass
 
 
-class SingleAnswerQuestion(ClosedQuestion):
+class SingleAnswerQuestion(Question):
     def __init__(self, text, shuffle: bool, pointEvaluator, answers, correct):
-        ClosedQuestion.__init__(self, text, shuffle, pointEvaluator, answers)
+        Question.__init__(self, text, shuffle, pointEvaluator, answers)
         self.__correct = correct
         self.__selectedAnswer = -1
 
@@ -70,9 +61,9 @@ class SingleAnswerQuestion(ClosedQuestion):
         return ret[:-1]
 
 
-class MultipleAnswerQuestion(ClosedQuestion):
+class MultipleAnswerQuestion(Question):
     def __init__(self, text, shuffle: bool, pointEvaluator, answers, correct):
-        ClosedQuestion.__init__(self, text, shuffle, pointEvaluator, answers)
+        Question.__init__(self, text, shuffle, pointEvaluator, answers)
         self.__correct = correct
         self.__selectedAnswers = []
 
@@ -104,7 +95,3 @@ class MultipleAnswerQuestion(ClosedQuestion):
             else:
                 ret += f"- {self._shuffledAnswers[i]}\n"
         return ret[:-1]
-
-
-class OpenQuestion:
-    pass

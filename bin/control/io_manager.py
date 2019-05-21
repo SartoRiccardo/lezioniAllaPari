@@ -1,12 +1,35 @@
 from datetime import datetime
 from markdown import markdown
+import json
 from os import remove
 import objects.user
 import objects.lesson
+import objects.test
+import objects.question
 
 
-def getTest(test):
-    pass
+def getTest(testId):
+    """
+    Ritorna il test selezionato
+    :param testId: l'id del test
+    :return: Un oggetto Test
+    """
+    TEST_DIR = "file/test/"
+
+    inputFile = open(f"{TEST_DIR}{testId}.json", "r")
+    testData = json.load(inputFile)
+
+    ret = objects.test.Test(testData["title"], testData["duration"], testData["shuffle"])
+    for question in testData["questions"]:
+        if question["type"] == "multiple":
+            temp = objects.question.MultipleAnswerQuestion(question["text"], question["shuffle"], question["evaluator"],
+                                                           question["answers"], question["correct_answers"])
+        else:
+            temp = objects.question.SingleAnswerQuestion(question["text"], question["shuffle"], question["evaluator"],
+                                                         question["answers"], question["correct_answer"])
+        ret.addQuestion(temp)
+
+    return ret
 
 
 def saveTest(test, content):
