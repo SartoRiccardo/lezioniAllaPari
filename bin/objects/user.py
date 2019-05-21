@@ -9,7 +9,10 @@ class User:
         self.__state = state
 
         if len(classrooms) == 1 and isinstance(classrooms[0], list):
-            self.__class = deepcopy(classrooms[0])
+            if classrooms[0][0] != "":
+                self.__class = deepcopy(classrooms[0])
+            else:
+                self.__class = []
         else:
             self.__class = list(classrooms)
 

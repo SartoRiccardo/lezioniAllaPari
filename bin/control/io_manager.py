@@ -165,13 +165,13 @@ def getElementsVisibleTo(user):
     for line in file:
         line = line.replace("\n", "").split(";")
 
-        if line[6] == "all":  # Tutte le classi
-            right = True
-        elif line[6] == "none":  # Nessuna classe
-            continue
-        else:
-            right = checkOwn(line, 5)  # Proprietario
-            if not right:
+        right = checkOwn(line, 5)  # Proprietario
+        if not right:
+            if line[6].lower() == "all":  # Tutte le classi
+                right = True
+            elif line[6].lower() == "none":  # Nessuna classe
+                continue
+            else:
                 right = checkClass(line, 6)  # Visibile a classe
                 if right:
                     right = checkDate(line, 3)  # Data superiore a corrente
