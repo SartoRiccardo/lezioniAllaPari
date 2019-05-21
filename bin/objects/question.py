@@ -30,6 +30,38 @@ class Question(ABC):
         """
         pass
 
+    @abstractmethod
+    def getValue(self):
+        """
+        Ritorna il massimo punteggio ottenibile
+        :return: il punteggio: float
+        """
+        pass
+
+    def setText(self, text):
+        self._text = text
+
+    def getText(self):
+        return self._text
+
+    def getNumberOfAnswers(self):
+        return len(self._answers)
+
+    def addAnswer(self, a):
+        self._answers.append(a)
+
+    def getAnswer(self, i, ignoreShuffle=False):
+        if ignoreShuffle:
+            return self._answers[i]
+        else:
+            return self._shuffledAnswers[i]
+
+    def setShuffle(self, shuffle):
+        self._shuffle = shuffle
+        self._shuffledAnswers = copy.copy(self._answers)
+        if self._shuffle:
+            random.shuffle(self._shuffledAnswers)
+
 
 class SingleAnswerQuestion(Question):
     def __init__(self, text, shuffle: bool, pointEvaluator, answers, correct):
@@ -47,6 +79,9 @@ class SingleAnswerQuestion(Question):
 
     def selectAnswer(self, i):
         self.__selectedAnswer = self._answers.index(self._shuffledAnswers[i])
+
+    def getValue(self):
+        return self._pointEvaluator.scorePerCorrect()
 
     def __str__(self):
         ret = self._text + "\n"
@@ -85,6 +120,12 @@ class MultipleAnswerQuestion(Question):
             self.__selectedAnswers.remove(correctIndex)
         else:
             self.__selectedAnswers.append(correctIndex)
+
+    def getValue(self):
+        ret = 0.0
+        for _ in self.__correct:
+            ret += self._pointEvaluator.scorePerCorrect()
+        return ret
 
     def __str__(self):
         ret = self._text + "\n"

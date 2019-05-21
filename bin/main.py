@@ -11,8 +11,9 @@ if __name__ == '__main__':
     if boolD:
         print("Inizio Programma\n")
 
-    from control.io_manager import getTest
-    print(getTest(2))
+    from control.io_manager import getTestScore
+    print(getTestScore(10, "pizidavi"))
+
     Control()
 
     if boolD:

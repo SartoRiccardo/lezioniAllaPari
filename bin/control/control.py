@@ -3,6 +3,9 @@ from control.login_control import LoginControl
 from view.view import View
 from control.io_manager import getLesson, getElementsVisibleTo
 from control.newLesson_control import NewLessonControl
+from control.test_control import TestControl
+from objects.lesson import Lesson
+from objects.test import TestLink
 
 
 class Control:
@@ -22,9 +25,12 @@ class Control:
         self.__root.mainloop()
 
     def openElement(self, e=None):
-        lesson_content = getLesson(self.__list.getSelectedElement())
-
-        self.__view.setHTML(lesson_content)
+        currentElement = self.__list.getSelectedElement()
+        if isinstance(currentElement, Lesson):
+            lesson_content = getLesson(self.__list.getSelectedElement())
+            self.__view.setHTML(lesson_content)
+        else:
+            pass
 
     def newLesson(self, e=None):
         NewLessonControl(self, self.__root, self.__user.getUsername(), self.__user.getClass())

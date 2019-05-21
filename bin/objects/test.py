@@ -1,4 +1,17 @@
+from objects.element import Element
 import random
+
+
+class TestLink(Element):
+    def __init__(self, id, title, start, end, owner, *classrooms):
+        """
+        Una classe che raprresenta un test o una verifica
+        :param title: Il nome del test
+        """
+        super(TestLink, self).__init__(id, title, start, end, owner)
+
+        for c in classrooms:
+            self.addClass(c)
 
 
 class Test:
@@ -24,7 +37,7 @@ class Test:
         Ritorna i punti presi
         :return: il punteggio (int)
         """
-        ret = 0
+        ret = 0.0
         for q in self.__questions:
             ret += q.getScore()
         return ret
@@ -61,6 +74,13 @@ class Test:
         self.__questions.append(q)
         self.shuffleQuestions()
 
+    def isShuffled(self):
+        return self.__shuffle
+
+    def setShuffle(self, shuffle):
+        self.__shuffle = shuffle
+        self.shuffleQuestions()
+
     def removeQuestion(self, q):
         if q in self.__questions:
             self.__questions.remove(q)
@@ -71,9 +91,13 @@ class Test:
             self.__questions.pop(i)
             self.shuffleQuestions()
 
-    def getQuestion(self, i):
+    def getQuestion(self, i, ignoreShuffle = False):
         if 0 <= i < len(self.__questions):
-            return self.__questions[i]
+            index = i if ignoreShuffle else self.__order.index(i)
+            return self.__questions[index]
+
+    def getNumberOfQuestions(self):
+        return len(self.__questions)
 
     def __str__(self):
         ret = self.__name + "\n"

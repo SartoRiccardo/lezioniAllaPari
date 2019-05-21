@@ -6,6 +6,7 @@ import objects.user
 import objects.lesson
 import objects.test
 import objects.question
+import objects.score
 
 
 def getTest(testId):
@@ -21,19 +22,55 @@ def getTest(testId):
 
     ret = objects.test.Test(testData["title"], testData["duration"], testData["shuffle"])
     for question in testData["questions"]:
+        evalData = question["evaluator"]
+        evaluator = objects.score.Score(evalData["unanswered"], evalData["neutralScore"],
+                                        evalData["scorePerCorrect"], evalData["scorePerIncorrect"])
         if question["type"] == "multiple":
-            temp = objects.question.MultipleAnswerQuestion(question["text"], question["shuffle"], question["evaluator"],
+            temp = objects.question.MultipleAnswerQuestion(question["text"], question["shuffle"], evaluator,
                                                            question["answers"], question["correct_answers"])
         else:
-            temp = objects.question.SingleAnswerQuestion(question["text"], question["shuffle"], question["evaluator"],
+            temp = objects.question.SingleAnswerQuestion(question["text"], question["shuffle"], evaluator,
                                                          question["answers"], question["correct_answer"])
         ret.addQuestion(temp)
 
+    inputFile.close()
     return ret
 
 
 def saveTest(test, content):
     pass
+
+
+def saveTestScore(test, user):
+    pass
+
+
+def getTestScore(testId, user):
+    """
+    Ritorna i punti fatti dall'utente nel tentativo precedente
+    :param testId: l'oggetto Test
+    :param user: l'username dell'utente
+    :return: il punteggio, 0.0 se non si non c'è stato nessun tentativo prima d'ora
+    """
+    TEST_DIR = "file/test/"
+
+    inputFile = open(f"{TEST_DIR}{testId}score.json", "r")
+    data = json.load(inputFile)
+    if user not in data:
+        return 0.0
+
+    userData = data[user]
+    test = getTest(testId)
+    test.setShuffle(False)
+    for i in range(test.getNumberOfQuestions()):
+        test.getQuestion(i).setShuffle(False)
+
+    for i in range(len(userData)):
+        for ans in userData[i]:
+            test.getQuestion(i).selectAnswer(ans)
+
+    inputFile.close()
+    return test.evaluate()
 
 
 def getLesson(lesson):
@@ -207,7 +244,8 @@ def getElementsVisibleTo(user):
             element = objects.lesson.Lesson(line[0], line[2], line[3],
                                             line[4], line[5], line[6:])  # Crea oggetto Lezione
         elif line[1] == "T":  # Test
-            pass
+            element = objects.test.TestLink(line[0], line[2], line[3],
+                                            line[4], line[5], line[6:])  # Crea oggetto TestLink
 
         array.append(element)
 
