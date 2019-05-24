@@ -9,7 +9,6 @@ class View:
         self.__control = control
 
         self.__root.title("Lezioni alla Pari")
-        self.__root.withdraw()  # Nascondi finestra fino al login
         self.__root.geometry("1000x600")
         self.__root.minsize(800, 500)
         # self.__root.resizable(width="False", height="False")
@@ -19,6 +18,9 @@ class View:
 
         self.__frameLesson = Frame(self.__root)
         self.__frameLesson.pack(side=BOTTOM, fill=BOTH, padx=5, pady=10, expand=True)
+
+        Button(self.__frameInfo, text="Esci", width=10, height=1, command=self.__control.logout).pack(
+            anchor=NE, side=RIGHT, padx=5)
 
         self.__user = None
         self.__list = None
@@ -49,7 +51,7 @@ class View:
 
         if user.getState() != "S":
             Button(self.__frameInfo, text="Nuova Lezione", width=10, height=1, command=self.__control.newLesson).pack(
-                anchor=NE, side=RIGHT)
+                anchor=NE, side=RIGHT, padx=2)
 
     def setList(self, lessons):
         self.__list.setList(lessons)  # Carica lista elementi
