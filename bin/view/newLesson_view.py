@@ -22,10 +22,10 @@ class NewLessonView:
         Label(self.__fTitle, text="\nNuova Lezione\n").pack(side=TOP, anchor=N)
 
         # Titolo
-        Label(self.__fTitle, text="Titolo").pack(side=LEFT, anchor=N)
+        Label(self.__fTitle, text="Titolo").pack(side=LEFT, anchor=N, padx=3)
         self.__title = Entry(self.__fTitle, justify="center")
         self.__title.focus()
-        self.__title.pack(side=LEFT, anchor=N)
+        self.__title.pack(side=LEFT, anchor=N, padx=3)
 
         self.__fTitle.pack(side=TOP, anchor=N, padx=10, pady=20)  # Fine Frame Titolo
 
