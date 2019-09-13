@@ -1,11 +1,14 @@
 from objects.element import Element
+from objects.result import Result
+import control.io_manager
 import random
+import time
 
 
 class TestLink(Element):
     def __init__(self, id, title, start, end, owner, *classrooms):
         """
-        Una classe che raprresenta un test o una verifica
+        Una classe che rappresenta il link che appare nella selezione delle lezioni.
         :param title: Il nome del test
         """
         super(TestLink, self).__init__(id, title, start, end, owner)
@@ -15,22 +18,26 @@ class TestLink(Element):
 
 
 class Test:
-    def __init__(self, name, duration, shuffle=True, questions=None):
+    def __init__(self, id, name, duration, maxAttempts, shuffle=True, questions=None):
         """
-        Una classe che raprresenta un test o una verifica
+        Una classe che rappresenta un test o una verifica
         :param name: Il nome del test
         :param shuffle: Un flag che determina se l'ordine delle domande è randomizzato
         :param questions:
         """
+        self.__id = id
         self.__name = name
         self.__duration = duration
         self.__shuffle = shuffle
+        self.__maxAttempts = maxAttempts
         if questions is None:
             self.__questions = []
         else:
             self.__questions = questions
         self.__order = []
         self.shuffleQuestions()
+
+        self.__results = control.io_manager.getTestResults(self.__id)
 
     def evaluate(self):
         """
@@ -57,7 +64,39 @@ class Test:
         if self.__shuffle:
             random.shuffle(self.__order)
 
+    def attemptsBy(self, user):
+        ret = []
+        for r in self.__results:
+            if r.getUsername() == user.getUsername():
+                ret.append(r)
+
+        return ret
+
+    def registerAttempt(self, user):
+        newResult = control.io_manager.registerAttempt(self, user)
+        self.__results.append(newResult)
+
+    def loadAttempt(self, result):
+        pass
+
+    def isBeingAttemptedBy(self, user):
+        now = int(time.time())
+        for attempt in self.attemptsBy(user):
+            if now - attempt.getDate() < self.__duration:
+                return attempt
+        return None
+
+    def selectAnswer(self, questionI, answerI):
+        if 0 <= questionI < len(self.__questions):
+            self.__questions[questionI].selectAnswer(answerI)
+
+    def updateCurrentAttempt(self, user):
+        attempt = self.isBeingAttemptedBy(user)
+
     # Get & Set
+    def getId(self):
+        return self.__id
+
     def getName(self):
         return self.__name
 
@@ -98,6 +137,19 @@ class Test:
 
     def getNumberOfQuestions(self):
         return len(self.__questions)
+
+    def getMaxAttempts(self):
+        return self.__maxAttempts
+
+    def setMaxAttempts(self, maxAttempts):
+        self.__maxAttempts = maxAttempts
+
+    def getResult(self, i):
+        if 0 <= i < len(self.__results):
+            return self.__results[i]
+
+    def lengthResults(self):
+        return len(self.__results)
 
     def __str__(self):
         ret = self.__name + "\n"

@@ -38,6 +38,14 @@ class Question(ABC):
         """
         pass
 
+    @abstractmethod
+    def getSelectedAnswers(self):
+        """
+        Ritorna le risposte selezionate
+        :return: int[]
+        """
+        pass
+
     def setText(self, text):
         self._text = text
 
@@ -83,6 +91,9 @@ class SingleAnswerQuestion(Question):
     def getValue(self):
         return self._pointEvaluator.scorePerCorrect()
 
+    def getSelectedAnswers(self):
+        return [self.__selectedAnswer] if self.__selectedAnswer > -1 else []
+
     def __str__(self):
         ret = self._text + "\n"
         shuffledIndex = self._shuffledAnswers.index(self._answers[self.__selectedAnswer]) \
@@ -126,6 +137,9 @@ class MultipleAnswerQuestion(Question):
         for _ in self.__correct:
             ret += self._pointEvaluator.scorePerCorrect()
         return ret
+
+    def getSelectedAnswers(self):
+        return copy.copy(self.__selectedAnswers)
 
     def __str__(self):
         ret = self._text + "\n"

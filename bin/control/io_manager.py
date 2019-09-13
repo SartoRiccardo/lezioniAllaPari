@@ -1,12 +1,14 @@
 from datetime import datetime
 from markdown import markdown
 import json
+import time
 from os import remove
 import objects.user
 import objects.lesson
 import objects.test
 import objects.question
 import objects.score
+import objects.result
 
 
 def getTest(testId):
@@ -20,7 +22,11 @@ def getTest(testId):
     inputFile = open(f"{TEST_DIR}{testId}.json", "r")
     testData = json.load(inputFile)
 
-    ret = objects.test.Test(testData["title"], testData["duration"], testData["shuffle"])
+    ret = objects.test.Test(
+        testId, testData["title"],
+        testData["duration"], testData["maxAttempts"],
+        testData["shuffle"]
+    )
     for question in testData["questions"]:
         evalData = question["evaluator"]
         evaluator = objects.score.Score(evalData["unanswered"], evalData["neutralScore"],
@@ -37,20 +43,80 @@ def getTest(testId):
     return ret
 
 
-def saveTest(test, content):
+def getAttempt(test, id):
+    TEST_DIR = "file/test/"
+    RESULTS_SUFFIX = "score"
+
+    testId = test.getId() if isinstance(test, objects.test.Test) else test
+
+    inputFile = open(f"{TEST_DIR}{testId}{RESULTS_SUFFIX}.json", "r")
+    resultData = json.load(inputFile)
+    inputFile.close()
+
+    for obj in resultData:
+        if obj["id"] == id:
+            ret = objects.result.Result(id, obj["username"], obj["date"])
+            for ans in obj["answers"]:
+                ret.addAnswer(ans)
+            return ret
+
+    return None
+
+
+def getTestResults(test):
+    TEST_DIR = "file/test/"
+    RESULTS_SUFFIX = "score"
+
+    testId = test.getId() if isinstance(test, objects.test.Test) else test
+
+    inputFile = open(f"{TEST_DIR}{testId}{RESULTS_SUFFIX}.json", "r")
+    resultData = json.load(inputFile)
+    inputFile.close()
+
+    ret = []
+    for r in resultData:
+        temp = objects.result.Result(r["id"], r["username"], r["date"])
+        for ans in r["answers"]:
+            temp.addAnswer(ans)
+        ret.append(temp)
+    return ret
+
+
+def saveTest(test):
     pass
 
 
-def saveTestScore(test, user):
-    pass
+def saveTestResults(test, newAttempts=None):
+    TEST_DIR = "file/test/"
+    RESULTS_SUFFIX = "score"
+
+    attempts = [test.getResult(i) for i in range(test.lengthResults())] if newAttempts is None else newAttempts
+
+    data = []
+    for a in attempts:
+        data.append(str(a))
+
+    output = open(f"{TEST_DIR}{test.getId()}{RESULTS_SUFFIX}.json", "w")
+    print(str(data))
+    output.write(str(data).replace("\"", "").replace("'", "\""))
+    output.close()
 
 
-def getTestScore(testId, user):
+def getCurrentAttemptBy(user, test):
+    test = test if isinstance(test, objects.test.Test) else getTest(test)
+    now = int(time.time())
+    for attempt in test.attemptsBy(user):
+        if now - attempt.getDate() < test.getDuration():
+            return attempt
+    return None
+
+
+def getTestScore(testId, user):  # BROKEN
     """
     Ritorna i punti fatti dall'utente nel tentativo precedente
     :param testId: l'oggetto Test
     :param user: l'username dell'utente
-    :return: il punteggio, 0.0 se non si non c'è stato nessun tentativo prima d'ora
+    :return: il punteggio, 0.0 se non c'è stato nessun tentativo prima d'ora
     """
     TEST_DIR = "file/test/"
 
@@ -71,6 +137,27 @@ def getTestScore(testId, user):
 
     inputFile.close()
     return test.evaluate()
+
+
+def registerAttempt(test, user):
+    id = len(getTestResults(test))
+    ret = objects.result.Result(id, user.getUsername(), int(time.time()))
+    return ret
+
+
+def updateAttempt(test, attempt):
+    testId = test.getId() if isinstance(test, objects.test.Test) else test
+    attemptId = attempt.getId() if isinstance(attempt, objects.result.Result) else attempt
+    attempt = getAttempt(test, attemptId)
+    allAttempts = getTestResults(testId)
+
+    for i in range(len(allAttempts)):
+        obj = allAttempts[i]
+        if obj == attempt:
+            allAttempts[i] = attempt
+        allAttempts[i] = json.loads(str(allAttempts[i]))
+
+    saveTestResults(test, allAttempts)
 
 
 def getLesson(lesson):

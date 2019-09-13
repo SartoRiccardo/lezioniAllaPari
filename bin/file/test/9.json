@@ -2,6 +2,7 @@
   "title":"title",
   "duration":5000,
   "shuffle": true,
+  "maxAttempts": 1,
   "questions": [
     {
       "type": "multiple",
@@ -19,6 +20,19 @@
     {
       "type": "single",
       "text": "SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP SHLOP",
+      "answers": ["answer1", "answer2", "answer3", "answer4"],
+      "shuffle": true,
+      "correct_answer": 0,
+      "evaluator": {
+        "unanswered": -1.0,
+        "neutralScore": 0.0,
+        "scorePerCorrect": 1.0,
+        "scorePerIncorrect": 0.0
+      }
+    },
+    {
+      "type": "single",
+      "text": "PROOOOOOOH",
       "answers": ["answer1", "answer2", "answer3", "answer4"],
       "shuffle": true,
       "correct_answer": 0,

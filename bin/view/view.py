@@ -30,11 +30,10 @@ class View:
         """
         Setta utente e crea grafica
         :param user: User
-        :param lessons: Lezioni visibile a User
         """
         self.__user = user
 
-        text = "Ciao "+self.__user.getName()+" "+self.__user.getSurname()+"!"
+        text = "Ciao " + self.__user.getName() + " " + self.__user.getSurname() + "!"
         Label(self.__frameInfo, text=text, font=("Helvetica", 18)).pack(side=LEFT, anchor=NW)
 
         # classes = "Classi: " if len(self.__user.getClass()) > 1 else "Classe: "
